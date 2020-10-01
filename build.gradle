@@ -1,0 +1,24 @@
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath BUILD_GRADLE
+        classpath KOTLIN_GRADLE
+        classpath MAVEN_GRADLE_PLUGIN
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+apply from: file(".script/create_dep_info.gradle")

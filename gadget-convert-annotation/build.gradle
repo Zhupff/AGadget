@@ -1,0 +1,5 @@
+import gadget.DepHelper
+
+DepHelper.build {
+    gadgetAnnotation()
+}

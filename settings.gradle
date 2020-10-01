@@ -1,0 +1,4 @@
+include ':gadget-convert-annotation'
+include ':gadget-convert-processor'
+include ':sample'
+rootProject.name = "agadget-project"
