@@ -1,4 +1,4 @@
-def publish2local = true
+def publish2local = false
 
 if (publish2local) {
     apply plugin: "maven"
