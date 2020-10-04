@@ -1,0 +1,24 @@
+def publish2local = true
+
+if (publish2local) {
+    apply plugin: "maven"
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                repository(url: properties.getProperty("NEXUS_URL")) {
+                    authentication(
+                        userName: properties.getProperty("NEXUS_USERNAME"),
+                        password: properties.getProperty("NEXUS_PASSWORD")
+                    )
+                }
+                pom.groupId = GADGET_GROUP
+                pom.artifactId = project.name
+                pom.version = GADGET_VERSION
+            }
+        }
+    }
+} else {
+    apply plugin: "com.github.dcendents.android-maven"
+}

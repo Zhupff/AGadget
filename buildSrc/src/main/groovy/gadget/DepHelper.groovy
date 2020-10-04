@@ -22,6 +22,10 @@ class DepHelper {
             apply from: rootProject.file(".script/gadget_sample.gradle")
         }
 
+        def gadgetPlugin() {
+            apply from: rootProject.file(".script/gadget_plugin.gradle")
+        }
+
         def gadgetApi() {
             apply from: rootProject.file(".script/gadget_api.gradle")
         }
@@ -32,6 +36,18 @@ class DepHelper {
 
         def gadgetProcessor() {
             apply from: rootProject.file(".script/gadget_processor.gradle")
+        }
+
+        def createDepInfo() {
+            apply from: rootProject.file(".script/create_dep_info.gradle")
+        }
+
+        def createGadgetInfo() {
+            apply from: rootProject.file(".script/create_gadget_info.gradle")
+        }
+
+        def jitpackPublish() {
+            apply from: rootProject.file(".script/jitpack_publish.gradle")
         }
 
         def gadgetConvertAnnotation() {

@@ -1,3 +1,4 @@
+include ':gadget'
 include ':gadget-convert-annotation'
 include ':gadget-convert-processor'
 include ':sample'

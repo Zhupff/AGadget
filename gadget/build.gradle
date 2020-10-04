@@ -1,6 +1,7 @@
 import gadget.DepHelper
 
 DepHelper.build {
-    gadgetAnnotation()
+    gadgetPlugin()
+    createGadgetInfo()
     jitpackPublish()
 }

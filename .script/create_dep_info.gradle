@@ -6,6 +6,7 @@ task createDepInfo() {
         .append("package gadget\n")
         .append("\n")
         .append("class DepInfo {\n")
+        .append("    private DepInfo() {}\n")
         .append(getProjectDef("    "))
         .append("}")
 }

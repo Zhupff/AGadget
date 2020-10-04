@@ -3,6 +3,6 @@ package gadget.convert
 /**
  * Author: Zhupf
  * E-mail: zhupfplus@gmail.com
- * Description:
+ * Description: Basic interface of XxxConvertible created by [Convert].
  */
-annotation class Convertible
+interface Convertible

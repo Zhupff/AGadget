@@ -3,4 +3,5 @@ import gadget.DepHelper
 DepHelper.build {
     gadgetProcessor()
     gadgetConvertAnnotation()
+    jitpackPublish()
 }

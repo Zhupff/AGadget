@@ -11,6 +11,8 @@ buildscript {
 }
 
 allprojects {
+    group = GADGET_GROUP
+    version = GADGET_VERSION
     repositories {
         google()
         jcenter()
@@ -21,4 +23,6 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-apply from: file(".script/create_dep_info.gradle")
+gadget.DepHelper.build {
+    createDepInfo()
+}
