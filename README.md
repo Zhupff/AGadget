@@ -1,4 +1,5 @@
 # agadget
+[![](https://jitpack.io/v/zhupff/agadget.svg)](https://jitpack.io/#zhupff/agadget)
 
 ## License
 ```
