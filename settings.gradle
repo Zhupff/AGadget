@@ -1,3 +1,5 @@
+include ':gadget-route-processor'
+include ':gadget-route-annotation'
 include ':gadget'
 include ':gadget-convert-annotation'
 include ':gadget-convert-processor'

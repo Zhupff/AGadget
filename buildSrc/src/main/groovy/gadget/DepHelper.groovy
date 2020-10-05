@@ -52,7 +52,13 @@ class DepHelper {
 
         def gadgetConvertAnnotation() {
             dependencies {
-                implementation project(":${DepInfo.GADGET_CONVERT_ANNOTATION}")
+                implementation project(DepInfo.GADGET_CONVERT_ANNOTATION)
+            }
+        }
+
+        def gadgetRouteAnnotation() {
+            dependencies {
+                implementation project(DepInfo.GADGET_ROUTE_ANNOTATION)
             }
         }
     }

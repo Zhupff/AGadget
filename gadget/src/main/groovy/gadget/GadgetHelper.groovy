@@ -22,13 +22,21 @@ class GadgetHelper {
             mProject = script.project
         }
 
+        private def isApplicationModule() {
+            return plugins.hasPlugin("com.android.application")
+        }
+
+        private def isAndroidLibraryModule() {
+            return plugins.hasPlugin("com.android.library")
+        }
+
         /**
          * Inject gadget-convert.
          */
         // For java project.
         def gadgetConvert() {
             try {
-                dependencies {
+                mProject.dependencies {
                     implementation GadgetInfo.GADGET_CONVERT_ANNOTATION
                     annotationProcessor GadgetInfo.GADGET_CONVERT_PROCESSOR
                 }
@@ -43,9 +51,53 @@ class GadgetHelper {
                 if (!plugins.hasPlugin("kotlin-kapt")) {
                     apply plugin: "kotlin-kapt"
                 }
-                dependencies {
+                mProject.dependencies {
                     implementation GadgetInfo.GADGET_CONVERT_ANNOTATION
                     kapt GadgetInfo.GADGET_CONVERT_PROCESSOR
+                }
+            } catch (Exception e) {
+                e.printStackTrace()
+            }
+        }
+
+        /**
+         * Inject gadget-route
+         */
+        // For java project.
+        def gadgetRoute() {
+            if (!isApplicationModule() && !isAndroidLibraryModule()) {
+                throw new IllegalStateException(
+                    "gadgetRoute() can only use in Application Module or Android Library Module.")
+            }
+            try {
+                mProject.android.defaultConfig.javaCompileOptions.annotationProcessorOptions {
+                    arguments.put("GADGET_ROUTE", mProject.name)
+                }
+                mProject.dependencies {
+                    implementation GadgetInfo.GADGET_ROUTE_ANNOTATION
+                    annotationProcessor GadgetInfo.GADGET_ROUTE_PROCESSOR
+                }
+            } catch (Exception e) {
+                e.printStackTrace()
+            }
+        }
+
+        // For kotlin project.
+        def gadgetRouteKt() {
+            if (!isApplicationModule() && !isAndroidLibraryModule()) {
+                throw new IllegalStateException(
+                    "gadgetRouteKt() can only use in Application Module or Android Library Module.")
+            }
+            try {
+                mProject.android.defaultConfig.javaCompileOptions.annotationProcessorOptions {
+                    arguments.put("GADGET_ROUTE", mProject.name)
+                }
+                if (!plugins.hasPlugin("kotlin-kapt")) {
+                    apply plugin: "kotlin-kapt"
+                }
+                mProject.dependencies {
+                    implementation GadgetInfo.GADGET_ROUTE_ANNOTATION
+                    kapt GadgetInfo.GADGET_ROUTE_PROCESSOR
                 }
             } catch (Exception e) {
                 e.printStackTrace()

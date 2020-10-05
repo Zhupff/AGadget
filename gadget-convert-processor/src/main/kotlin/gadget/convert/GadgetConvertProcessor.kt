@@ -13,7 +13,6 @@ import javax.lang.model.element.TypeElement
 /**
  * Author: Zhupf
  * E-mail: zhupfplus@gmail.com
- * Description: Apt processor for [Convert].
  */
 @AutoService(Processor::class)
 class GadgetConvertProcessor : AbstractProcessor() {

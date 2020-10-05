@@ -26,7 +26,7 @@ def getProjectDef(String blank) {
     rootProject.subprojects.each { p ->
         String pName = p.name
         String defName = pName.replace("-", "_").toUpperCase()
-        sb.append("${blank}private static final String ${defName} = \"${GADGET_GROUP}:${pName}:${GADGET_VERSION}\"\n")
+        sb.append("${blank}static final String ${defName} = \"${GADGET_GROUP}:${pName}:${GADGET_VERSION}\"\n")
     }
     return sb.toString()
 }

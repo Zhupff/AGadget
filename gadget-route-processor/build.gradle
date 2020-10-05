@@ -1,0 +1,7 @@
+import gadget.DepHelper
+
+DepHelper.build {
+    gadgetProcessor()
+    gadgetRouteAnnotation()
+    jitpackPublish()
+}
