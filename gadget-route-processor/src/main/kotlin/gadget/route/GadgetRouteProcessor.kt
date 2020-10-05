@@ -34,19 +34,19 @@ class GadgetRouteProcessor : AbstractProcessor() {
             return false
         }
 
-        val routeMap = HashMap<String, String>()
+        val routeTable = HashMap<String, String>()
         roundEnvironment?.getElementsAnnotatedWith(Route::class.java)?.forEach { element ->
             val packageName = processingEnv.elementUtils.getPackageOf(element).qualifiedName.toString()
             val elementName = element.simpleName
             val route = element.getAnnotation(Route::class.java)
             val path = route.path
-            routeMap[path] = "$packageName.$elementName"
+            routeTable[path] = "$packageName.$elementName"
         }
-        if (routeMap.isNullOrEmpty()) {
+        if (routeTable.isNullOrEmpty()) {
             return false
         }
 
-        val javaFile = JavaFile.builder("gadget.route", getXxxRouteTableTypeSpec(moduleName, routeMap)).build()
+        val javaFile = JavaFile.builder("gadget.route", getXxxRouteTableTypeSpec(moduleName, routeTable)).build()
         try {
             javaFile.writeTo(processingEnv.filer)
         } catch (e: Exception) {
@@ -56,21 +56,21 @@ class GadgetRouteProcessor : AbstractProcessor() {
         return true
     }
 
-    private fun getXxxRouteTableTypeSpec(moduleName: String, routeMap: HashMap<String, String>): TypeSpec {
+    private fun getXxxRouteTableTypeSpec(moduleName: String, routeTable: HashMap<String, String>): TypeSpec {
         val mName = moduleName.toUpperCase().replace("-", "")
         return TypeSpec.classBuilder("${mName}_RouteTable")
             .superclass(RouteTable::class.java)
             .addModifiers(Modifier.PUBLIC)
-            .addMethod(getRegisterMethodSpec(routeMap))
+            .addMethod(getRegisterMethodSpec(routeTable))
             .build()
     }
 
-    private fun getRegisterMethodSpec(routeMap: HashMap<String, String>): MethodSpec {
+    private fun getRegisterMethodSpec(routeTable: HashMap<String, String>): MethodSpec {
         val methodSpecBuilder = MethodSpec.methodBuilder("register")
             .addAnnotation(Override::class.java)
             .addModifiers(Modifier.PUBLIC)
             .addParameter(HashMap::class.java, "routeMap")
-        routeMap.forEach { (path, route) ->
+        routeTable.forEach { (path, route) ->
             methodSpecBuilder.addStatement("routeMap.put(\$S, \$S)", path, route)
         }
         return methodSpecBuilder.build()

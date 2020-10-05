@@ -75,6 +75,7 @@ class GadgetHelper {
                 }
                 mProject.dependencies {
                     implementation GadgetInfo.GADGET_ROUTE_ANNOTATION
+                    implementation GadgetInfo.GADGET_ROUTE_API
                     annotationProcessor GadgetInfo.GADGET_ROUTE_PROCESSOR
                 }
             } catch (Exception e) {
@@ -97,6 +98,7 @@ class GadgetHelper {
                 }
                 mProject.dependencies {
                     implementation GadgetInfo.GADGET_ROUTE_ANNOTATION
+                    implementation GadgetInfo.GADGET_ROUTE_API
                     kapt GadgetInfo.GADGET_ROUTE_PROCESSOR
                 }
             } catch (Exception e) {

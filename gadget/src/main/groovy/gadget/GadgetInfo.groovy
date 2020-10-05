@@ -12,6 +12,7 @@ class GadgetInfo {
     static final String GADGET_CONVERT_ANNOTATION = "com.github.zhupff.agadget:gadget-convert-annotation:0.0.1"
     static final String GADGET_CONVERT_PROCESSOR = "com.github.zhupff.agadget:gadget-convert-processor:0.0.1"
     static final String GADGET_ROUTE_ANNOTATION = "com.github.zhupff.agadget:gadget-route-annotation:0.0.1"
+    static final String GADGET_ROUTE_API = "com.github.zhupff.agadget:gadget-route-api:0.0.1"
     static final String GADGET_ROUTE_PROCESSOR = "com.github.zhupff.agadget:gadget-route-processor:0.0.1"
     static final String SAMPLE = "com.github.zhupff.agadget:sample:0.0.1"
 }

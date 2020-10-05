@@ -20,7 +20,6 @@ android {
 
 dependencies {
     implementation ANDROIDX
-    implementation CONSTRAINT_LAYOUT
     implementation KOTLIN_KTX
     implementation KOTLIN_STDLIB
 }

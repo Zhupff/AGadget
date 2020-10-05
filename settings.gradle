@@ -1,3 +1,4 @@
+include ':gadget-route-api'
 include ':gadget-route-processor'
 include ':gadget-route-annotation'
 include ':gadget'
