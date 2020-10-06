@@ -50,6 +50,12 @@ class DepHelper {
             apply from: rootProject.file(".script/jitpack_publish.gradle")
         }
 
+        def gadgetBase() {
+            dependencies {
+                implementation project(DepInfo.GADGET_BASE)
+            }
+        }
+
         def gadgetConvertAnnotation() {
             dependencies {
                 implementation project(DepInfo.GADGET_CONVERT_ANNOTATION)

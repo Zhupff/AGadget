@@ -6,10 +6,12 @@ class DepInfo {
     private DepInfo() {}
     // Project def.
     static final String GADGET = ":gadget"
+    static final String GADGET_BASE = ":gadget-base"
     static final String GADGET_CONVERT_ANNOTATION = ":gadget-convert-annotation"
     static final String GADGET_CONVERT_PROCESSOR = ":gadget-convert-processor"
     static final String GADGET_ROUTE_ANNOTATION = ":gadget-route-annotation"
     static final String GADGET_ROUTE_API = ":gadget-route-api"
+    static final String GADGET_ROUTE_PLUGIN = ":gadget-route-plugin"
     static final String GADGET_ROUTE_PROCESSOR = ":gadget-route-processor"
     static final String SAMPLE = ":sample"
 }

@@ -2,10 +2,9 @@ package gadget.convert
 
 import com.google.auto.service.AutoService
 import com.squareup.javapoet.*
-import javax.annotation.processing.AbstractProcessor
+import gadget.base.BaseGadgetProcessor
 import javax.annotation.processing.Processor
 import javax.annotation.processing.RoundEnvironment
-import javax.lang.model.SourceVersion
 import javax.lang.model.element.Element
 import javax.lang.model.element.Modifier
 import javax.lang.model.element.TypeElement
@@ -15,13 +14,9 @@ import javax.lang.model.element.TypeElement
  * E-mail: zhupfplus@gmail.com
  */
 @AutoService(Processor::class)
-class GadgetConvertProcessor : AbstractProcessor() {
-
-    override fun getSupportedOptions(): Set<String> = emptySet()
+class GadgetConvertProcessor : BaseGadgetProcessor() {
 
     override fun getSupportedAnnotationTypes(): Set<String> = setOf(Convert::class.java.canonicalName)
-
-    override fun getSupportedSourceVersion(): SourceVersion = SourceVersion.latestSupported()
 
     override fun process(typeElementSet: Set<TypeElement>?, roundEnvironment: RoundEnvironment?): Boolean {
         roundEnvironment?.getElementsAnnotatedWith(Convert::class.java)?.forEach { element ->

@@ -1,0 +1,6 @@
+import gadget.DepHelper
+
+DepHelper.build {
+    gadgetPlugin()
+    jitpackPublish()
+}

@@ -2,6 +2,7 @@ import gadget.DepHelper
 
 DepHelper.build {
     gadgetProcessor()
+    gadgetBase()
     gadgetConvertAnnotation()
     jitpackPublish()
 }

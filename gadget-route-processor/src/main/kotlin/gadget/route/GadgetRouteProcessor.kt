@@ -4,10 +4,9 @@ import com.google.auto.service.AutoService
 import com.squareup.javapoet.JavaFile
 import com.squareup.javapoet.MethodSpec
 import com.squareup.javapoet.TypeSpec
-import javax.annotation.processing.AbstractProcessor
+import gadget.base.BaseGadgetProcessor
 import javax.annotation.processing.Processor
 import javax.annotation.processing.RoundEnvironment
-import javax.lang.model.SourceVersion
 import javax.lang.model.element.Modifier
 import javax.lang.model.element.TypeElement
 import kotlin.collections.HashMap
@@ -17,13 +16,9 @@ import kotlin.collections.HashMap
  * E-mail: zhupfplus@gmail.com
  */
 @AutoService(Processor::class)
-class GadgetRouteProcessor : AbstractProcessor() {
-
-    override fun getSupportedOptions(): Set<String> = emptySet()
+class GadgetRouteProcessor : BaseGadgetProcessor() {
 
     override fun getSupportedAnnotationTypes(): Set<String> = setOf(Route::class.java.canonicalName)
-
-    override fun getSupportedSourceVersion(): SourceVersion = SourceVersion.latestSupported()
 
     override fun process(typeElementSet: Set<TypeElement>?, roundEnvironment: RoundEnvironment?): Boolean {
         if (typeElementSet == null) {
