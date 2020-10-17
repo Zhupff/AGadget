@@ -1,6 +1,7 @@
 package gadget.route
 
 import gadget.base.plugin.BaseGadgetAppTransform
+import gadget.base.plugin.BaseGadgetTransformer
 
 /**
  * Author: Zhupf
@@ -8,4 +9,8 @@ import gadget.base.plugin.BaseGadgetAppTransform
  * Description:
  */
 class GadgetRouteTransform : BaseGadgetAppTransform() {
+
+    override fun getTransformers(): List<BaseGadgetTransformer> {
+        return listOf(GadgetRouteTransformer())
+    }
 }

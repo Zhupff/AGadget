@@ -25,5 +25,5 @@ abstract class BaseGadgetTransformer {
 
     open fun transformDirClass(classBytes: ByteArray): ByteArray = transformClass(classBytes)
 
-    open fun transformJarClass(classBytes: ByteArray): ByteArray = transformJarClass(classBytes)
+    open fun transformJarClass(classBytes: ByteArray): ByteArray = transformClass(classBytes)
 }
