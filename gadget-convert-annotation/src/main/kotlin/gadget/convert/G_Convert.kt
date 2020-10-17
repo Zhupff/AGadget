@@ -7,4 +7,4 @@ package gadget.convert
  */
 @Retention(AnnotationRetention.BINARY)
 @Target(AnnotationTarget.CLASS)
-annotation class Convert
+annotation class G_Convert

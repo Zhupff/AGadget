@@ -16,10 +16,13 @@ import javax.lang.model.element.TypeElement
 @AutoService(Processor::class)
 class GadgetConvertProcessor : BaseGadgetProcessor() {
 
-    override fun getSupportedAnnotationTypes(): Set<String> = setOf(Convert::class.java.canonicalName)
+    override fun getSupportedAnnotationTypes(): Set<String> = setOf(G_Convert::class.java.canonicalName)
 
     override fun process(typeElementSet: Set<TypeElement>?, roundEnvironment: RoundEnvironment?): Boolean {
-        roundEnvironment?.getElementsAnnotatedWith(Convert::class.java)?.forEach { element ->
+        if (typeElementSet == null) {
+            return false
+        }
+        roundEnvironment?.getElementsAnnotatedWith(G_Convert::class.java)?.forEach { element ->
             val packageName = processingEnv.elementUtils.getPackageOf(element).qualifiedName.toString()
             val javaFile = JavaFile.builder(packageName, getXxxConvertibleTypeSpec(element)).build()
             try {
@@ -37,7 +40,7 @@ class GadgetConvertProcessor : BaseGadgetProcessor() {
         val elementTypeName = ClassName.get(element.asType())
         return TypeSpec.interfaceBuilder(interfaceName)
             .addModifiers(Modifier.PUBLIC)
-            .addSuperinterface(Convertible::class.java)
+            .addSuperinterface(G_Convertible::class.java)
             .addMethod(getConvertToMethodSpec(elementName, elementTypeName))
             .addMethod(getConvertFromMethodSpec(elementName, elementTypeName))
             .build()

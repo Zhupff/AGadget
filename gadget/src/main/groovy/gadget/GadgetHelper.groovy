@@ -1,12 +1,13 @@
 package gadget
 
+import gadget.dor.GadgetDoRPlugin
 import gadget.route.GadgetRoutePlugin
 import org.gradle.api.Project
 
 /**
  * Author: Zhupf
  * E-mail: zhupfplus@gmail.com
- * Description: Gradle dependencies injector.
+ * Description: Gradle dependencies inject helper.
  */
 class GadgetHelper {
     private GadgetHelper() {}
@@ -30,6 +31,30 @@ class GadgetHelper {
         private def isAndroidLibraryModule() {
             return plugins.hasPlugin("com.android.library")
         }
+
+
+        /** Inject gadget-common begin. **/
+        def gadgetCommonLib() {
+            try {
+                mProject.dependencies {
+                    implementation GadgetInfo.GADGET_COMMON_LIB
+                }
+            } catch (Exception e) {
+                e.printStackTrace()
+            }
+        }
+
+        def gadgetCommonModule() {
+            try {
+                mProject.dependencies {
+                    implementation GadgetInfo.GADGET_COMMON_MODULE
+                }
+            } catch (Exception e) {
+                e.printStackTrace()
+            }
+        }
+        /** Inject gadget-common end. **/
+
 
         /** Inject gadget-convert begin. **/
         // For java project.
@@ -59,6 +84,41 @@ class GadgetHelper {
             }
         }
         /** Inject gadget-convert end. **/
+
+
+        /** Inject gadget-dor begin. **/
+        def gadgetDoR() {
+            try {
+                if (isApplicationModule()) {
+                    apply plugin: GadgetDoRPlugin
+                }
+                mProject.dependencies {
+                    implementation GadgetInfo.GADGET_DOR_ANNOTATION
+                    annotationProcessor GadgetInfo.GADGET_DOR_PROCESSOR
+                }
+            } catch (Exception e) {
+                e.printStackTrace()
+            }
+        }
+
+        // For kotlin project.
+        def gadgetDoRKt() {
+            try {
+                if (isApplicationModule()) {
+                    apply plugin: GadgetDoRPlugin
+                }
+                if (!plugins.hasPlugin("kotlin-kapt")) {
+                    apply plugin: "kotlin-kapt"
+                }
+                mProject.dependencies {
+                    implementation GadgetInfo.GADGET_DOR_ANNOTATION
+                    kapt GadgetInfo.GADGET_DOR_PROCESSOR
+                }
+            } catch (Exception e) {
+                e.printStackTrace()
+            }
+        }
+        /** Inject gadget-dor end. **/
 
 
         /** Inject gadget-route begin. **/

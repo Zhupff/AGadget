@@ -1,4 +1,4 @@
-package gadget.base.plugin
+package gadget.base.plugin.asm
 
 /**
  * Author: Zhupf

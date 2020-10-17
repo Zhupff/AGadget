@@ -4,7 +4,7 @@ import com.android.build.api.transform.JarInput
 import com.android.build.api.transform.TransformInvocation
 import com.android.build.api.transform.TransformOutputProvider
 import gadget.base.plugin.BaseGadgetAppTransform
-import gadget.base.plugin.BaseGadgetTransformer
+import gadget.base.plugin.asm.BaseGadgetTransformer
 
 /**
  * Author: Zhupf

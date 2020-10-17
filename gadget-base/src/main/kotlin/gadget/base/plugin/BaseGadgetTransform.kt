@@ -2,6 +2,7 @@ package gadget.base.plugin
 
 import com.android.build.api.transform.*
 import com.android.build.gradle.internal.pipeline.TransformManager
+import gadget.base.plugin.asm.BaseGadgetTransformer
 import org.apache.commons.io.FileUtils
 
 /**

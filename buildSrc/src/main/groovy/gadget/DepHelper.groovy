@@ -64,9 +64,33 @@ class DepHelper {
             }
         }
 
+        def gadgetCommonLib() {
+            dependencies {
+                implementation project(DepInfo.GADGET_COMMON_LIB)
+            }
+        }
+
+        def gadgetCommonModule() {
+            dependencies {
+                implementation project(DepInfo.GADGET_COMMON_MODULE)
+            }
+        }
+
         def gadgetConvertAnnotation() {
             dependencies {
                 implementation project(DepInfo.GADGET_CONVERT_ANNOTATION)
+            }
+        }
+
+        def gadgetDoRAnnotation() {
+            dependencies {
+                implementation project(DepInfo.GADGET_DOR_ANNOTATION)
+            }
+        }
+
+        def gadgetDoRPlugin() {
+            dependencies {
+                implementation project(DepInfo.GADGET_DOR_PLUGIN)
             }
         }
 
