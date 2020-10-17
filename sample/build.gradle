@@ -1,5 +1,5 @@
 import gadget.DepHelper
 
 DepHelper.build {
-    gadgetSample()
+    gadgetSampleGradle()
 }

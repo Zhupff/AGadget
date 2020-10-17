@@ -1,6 +1,6 @@
 import gadget.DepHelper
 
 DepHelper.build {
-    gadgetAnnotation()
-    jitpackPublish()
+    gadgetAnnotationGradle()
+    jitpackPublishGradle()
 }

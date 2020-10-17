@@ -5,11 +5,11 @@ package gadget.route
  * E-mail: zhupfplus@gmail.com
  * Description:
  */
-object Router {
+object G_Router {
 
     val mRouteTable: HashMap<String, String> = HashMap()
 
-    fun register(vararg table: RouteTable) {
+    fun register(vararg table: G_RouteTable) {
         table.forEach { it.register(mRouteTable) }
     }
 }

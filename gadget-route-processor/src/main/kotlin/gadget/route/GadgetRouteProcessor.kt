@@ -4,7 +4,7 @@ import com.google.auto.service.AutoService
 import com.squareup.javapoet.JavaFile
 import com.squareup.javapoet.MethodSpec
 import com.squareup.javapoet.TypeSpec
-import gadget.base.BaseGadgetProcessor
+import gadget.base.processor.BaseGadgetProcessor
 import javax.annotation.processing.Processor
 import javax.annotation.processing.RoundEnvironment
 import javax.lang.model.element.Modifier
@@ -18,7 +18,7 @@ import kotlin.collections.HashMap
 @AutoService(Processor::class)
 class GadgetRouteProcessor : BaseGadgetProcessor() {
 
-    override fun getSupportedAnnotationTypes(): Set<String> = setOf(Route::class.java.canonicalName)
+    override fun getSupportedAnnotationTypes(): Set<String> = setOf(G_Route::class.java.canonicalName)
 
     override fun process(typeElementSet: Set<TypeElement>?, roundEnvironment: RoundEnvironment?): Boolean {
         if (typeElementSet == null) {
@@ -30,10 +30,10 @@ class GadgetRouteProcessor : BaseGadgetProcessor() {
         }
 
         val routeTable = HashMap<String, String>()
-        roundEnvironment?.getElementsAnnotatedWith(Route::class.java)?.forEach { element ->
+        roundEnvironment?.getElementsAnnotatedWith(G_Route::class.java)?.forEach { element ->
             val packageName = processingEnv.elementUtils.getPackageOf(element).qualifiedName.toString()
             val elementName = element.simpleName
-            val route = element.getAnnotation(Route::class.java)
+            val route = element.getAnnotation(G_Route::class.java)
             val path = route.path
             routeTable[path] = "$packageName.$elementName"
         }
@@ -54,7 +54,7 @@ class GadgetRouteProcessor : BaseGadgetProcessor() {
     private fun getXxxRouteTableTypeSpec(moduleName: String, routeTable: HashMap<String, String>): TypeSpec {
         val mName = moduleName.toUpperCase().replace("-", "")
         return TypeSpec.classBuilder("${mName}_RouteTable")
-            .superclass(RouteTable::class.java)
+            .superclass(G_RouteTable::class.java)
             .addModifiers(Modifier.PUBLIC)
             .addMethod(getRegisterMethodSpec(routeTable))
             .build()

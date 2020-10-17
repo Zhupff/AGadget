@@ -24,5 +24,5 @@ task clean(type: Delete) {
 }
 
 gadget.DepHelper.build {
-    createDepInfo()
+    createDepInfoGradle()
 }

@@ -3,8 +3,7 @@ package gadget.route
 /**
  * Author: Zhupf
  * E-mail: zhupfplus@gmail.com
- * Description:
  */
 @Retention(AnnotationRetention.BINARY)
 @Target(AnnotationTarget.CLASS)
-annotation class Route(val path: String)
+annotation class G_Route(val path: String)

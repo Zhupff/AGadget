@@ -1,4 +1,4 @@
-package gadget.base
+package gadget.base.processor
 
 import javax.annotation.processing.AbstractProcessor
 import javax.lang.model.SourceVersion

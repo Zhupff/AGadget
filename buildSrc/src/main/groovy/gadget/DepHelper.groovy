@@ -18,37 +18,45 @@ class DepHelper {
             mProject = script.project
         }
 
-        def gadgetSample() {
+        /* Build.gradle */
+
+        def gadgetSampleGradle() {
             apply from: rootProject.file(".script/gadget_sample.gradle")
         }
 
-        def gadgetPlugin() {
+        def gadgetBaseGradle() {
+            apply from: rootProject.file(".script/gadget_base.gradle")
+        }
+
+        def gadgetPluginGradle() {
             apply from: rootProject.file(".script/gadget_plugin.gradle")
         }
 
-        def gadgetApi() {
+        def gadgetApiGradle() {
             apply from: rootProject.file(".script/gadget_api.gradle")
         }
 
-        def gadgetAnnotation() {
+        def gadgetAnnotationGradle() {
             apply from: rootProject.file(".script/gadget_annotation.gradle")
         }
 
-        def gadgetProcessor() {
+        def gadgetProcessorGradle() {
             apply from: rootProject.file(".script/gadget_processor.gradle")
         }
 
-        def createDepInfo() {
+        def createDepInfoGradle() {
             apply from: rootProject.file(".script/create_dep_info.gradle")
         }
 
-        def createGadgetInfo() {
+        def createGadgetInfoGradle() {
             apply from: rootProject.file(".script/create_gadget_info.gradle")
         }
 
-        def jitpackPublish() {
+        def jitpackPublishGradle() {
             apply from: rootProject.file(".script/jitpack_publish.gradle")
         }
+
+        /* Module dependency */
 
         def gadgetBase() {
             dependencies {
@@ -65,6 +73,12 @@ class DepHelper {
         def gadgetRouteAnnotation() {
             dependencies {
                 implementation project(DepInfo.GADGET_ROUTE_ANNOTATION)
+            }
+        }
+
+        def gadgetRoutePlugin() {
+            dependencies {
+                implementation project(DepInfo.GADGET_ROUTE_PLUGIN)
             }
         }
     }

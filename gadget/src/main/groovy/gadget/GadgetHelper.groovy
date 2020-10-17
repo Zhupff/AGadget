@@ -1,5 +1,6 @@
 package gadget
 
+import gadget.route.GadgetRoutePlugin
 import org.gradle.api.Project
 
 /**
@@ -30,9 +31,7 @@ class GadgetHelper {
             return plugins.hasPlugin("com.android.library")
         }
 
-        /**
-         * Inject gadget-convert.
-         */
+        /** Inject gadget-convert begin. **/
         // For java project.
         def gadgetConvert() {
             try {
@@ -59,10 +58,10 @@ class GadgetHelper {
                 e.printStackTrace()
             }
         }
+        /** Inject gadget-convert end. **/
 
-        /**
-         * Inject gadget-route
-         */
+
+        /** Inject gadget-route begin. **/
         // For java project.
         def gadgetRoute() {
             if (!isApplicationModule() && !isAndroidLibraryModule()) {
@@ -105,5 +104,10 @@ class GadgetHelper {
                 e.printStackTrace()
             }
         }
+
+        def gadgetRoutePlugin() {
+            apply plugin: GadgetRoutePlugin
+        }
+        /** Inject gadget-route end. **/
     }
 }

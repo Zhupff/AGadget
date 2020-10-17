@@ -2,7 +2,7 @@ package gadget.convert
 
 import com.google.auto.service.AutoService
 import com.squareup.javapoet.*
-import gadget.base.BaseGadgetProcessor
+import gadget.base.processor.BaseGadgetProcessor
 import javax.annotation.processing.Processor
 import javax.annotation.processing.RoundEnvironment
 import javax.lang.model.element.Element

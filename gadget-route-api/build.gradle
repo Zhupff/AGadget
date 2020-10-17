@@ -1,7 +1,8 @@
 import gadget.DepHelper
 
 DepHelper.build {
-    gadgetApi()
+    gadgetApiGradle()
+    jitpackPublishGradle()
+
     gadgetRouteAnnotation()
-    jitpackPublish()
 }
