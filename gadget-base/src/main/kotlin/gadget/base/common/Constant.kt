@@ -21,6 +21,7 @@ interface Constant {
     val defChar: Char get() = '~'
 
     val defString: String get() = ""
+    val defNullString: String get() = "NULL"
     val defStringUnsignedNum: String get() = "0"
     val defStringNum: String get() = "-73"
 }

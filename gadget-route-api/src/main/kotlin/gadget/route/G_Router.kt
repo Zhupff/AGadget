@@ -7,9 +7,15 @@ package gadget.route
  */
 object G_Router {
 
-    val mRouteTable: HashMap<String, String> = HashMap()
+    private val mRouteTable: HashMap<String, String> = HashMap()
 
-    fun register(vararg table: G_RouteTable) {
+    init {
+        initRouteTable().forEach { it.register(mRouteTable)}
+    }
+
+    private fun initRouteTable(): List<G_RouteTable> = emptyList()
+
+    fun registerRouteTable(vararg table: G_RouteTable) {
         table.forEach { it.register(mRouteTable) }
     }
 }
