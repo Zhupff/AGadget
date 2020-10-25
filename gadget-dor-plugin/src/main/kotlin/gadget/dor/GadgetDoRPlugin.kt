@@ -7,4 +7,6 @@ import gadget.base.plugin.BaseGadgetAppPlugin
  * E-mail: zhupfplus@gmail.com
  */
 class GadgetDoRPlugin : BaseGadgetAppPlugin() {
+
+    override fun newGadgetTransform() = GadgetDoRTransform()
 }
