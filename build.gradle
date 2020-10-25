@@ -19,10 +19,10 @@ allprojects {
     }
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
-}
-
 gadget.DepHelper.build {
     createDepInfoGradle()
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
 }

@@ -4,6 +4,6 @@ package gadget.dor
  * Author: Zhupf
  * E-mail: zhupfplus@gmail.com
  */
-abstract class G_DoRTable {
-    abstract fun init(isDebug: Boolean)
+interface TaG_DoR {
+    fun init(isDebug: Boolean)
 }

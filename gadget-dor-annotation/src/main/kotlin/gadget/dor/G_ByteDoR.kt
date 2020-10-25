@@ -6,4 +6,4 @@ package gadget.dor
  */
 @Retention(AnnotationRetention.BINARY)
 @Target(AnnotationTarget.FIELD)
-annotation class G_ByteDoR(val debug: Byte, val release: Byte, val beFinal: Boolean = false)
+annotation class G_ByteDoR(val debug: Byte, val release: Byte)

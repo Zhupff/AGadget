@@ -19,14 +19,14 @@ internal class GadgetRouteTransformer : BaseGadgetTransformer(), GadgetRouteCons
         val cn = ClassNode()
         cr.accept(cn, ClassReader.EXPAND_FRAMES)
 
-        if (cn.name.startsWith(gadgetRoutePackage)) {
-            if (cn.superName == G_RouteTableName) {
-                mRouteTableList.add(cn.name)
-            } else if (cn.name == G_RouterName) {
+        if (cn.name.startsWith(_GadgetRoutePackage)) {
+            if (cn.name == _G_Router) {
                 val cw = ClassWriter(cr, ClassWriter.COMPUTE_MAXS)
                 val cv = GadgetRouteCV(cw, mRouteTableList)
                 cr.accept(cv, ClassReader.EXPAND_FRAMES)
                 return cw.toByteArray()
+            } else if (cn.interfaces.contains(_TaG_Route)) {
+                mRouteTableList.add(cn.name)
             }
         }
         return super.transformClass(classBytes)

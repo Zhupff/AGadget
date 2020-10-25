@@ -13,6 +13,6 @@ internal class GadgetRouteCV(cv: ClassVisitor, val routeTableList: List<String>)
 
     override fun visitMethod(access: Int, name: String?, desc: String?, signature: String?, exceptions: Array<String>?): MethodVisitor {
         val mv = super.visitMethod(access, name, desc, signature, exceptions)
-        return if (G_RouterInitRouteTableMethodName == name) GadgetRouteMV(mv, routeTableList) else mv
+        return if (_getTaG_Route == name) GadgetRouteMV(mv, routeTableList) else mv
     }
 }

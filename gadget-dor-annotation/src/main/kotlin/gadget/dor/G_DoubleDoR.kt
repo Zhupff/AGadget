@@ -6,4 +6,4 @@ package gadget.dor
  */
 @Retention(AnnotationRetention.BINARY)
 @Target(AnnotationTarget.FIELD)
-annotation class G_DoubleDoR(val debug: Double, val release: Double, val beFinal: Boolean = false)
+annotation class G_DoubleDoR(val debug: Double, val release: Double)

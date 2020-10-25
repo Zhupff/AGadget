@@ -8,4 +8,4 @@ import kotlin.Char
  */
 @Retention(AnnotationRetention.BINARY)
 @Target(AnnotationTarget.FIELD)
-annotation class G_CharDoR(val debug: Char, val release: Char, val beFinal: Boolean = false)
+annotation class G_CharDoR(val debug: Char, val release: Char)

@@ -6,13 +6,13 @@ package gadget.route
  */
 internal interface GadgetRouteConstant {
 
-    val gadgetRouteApiJarName: String get() = "gadget-route-api"
+    val _GadgetRouteApiJarName: String get() = "gadget-route-api"
 
-    val gadgetRoutePackage: String get() = "gadget/route/"
+    val _GadgetRoutePackage: String get() = "gadget/route/"
 
-    val G_RouteTableName: String get() = "gadget/route/G_RouteTable"
+    val _TaG_Route: String get() = "gadget/route/TaG_Route"
 
-    val G_RouterName: String get() = "gadget/route/G_Router"
+    val _G_Router: String get() = "gadget/route/G_Router"
 
-    val G_RouterInitRouteTableMethodName: String get() = "initRouteTable"
+    val _getTaG_Route: String get() = "_getTaG_Route"
 }

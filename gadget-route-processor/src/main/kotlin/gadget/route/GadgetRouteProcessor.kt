@@ -24,7 +24,7 @@ class GadgetRouteProcessor : BaseGadgetProcessor() {
         if (typeElementSet == null) {
             return false
         }
-        val moduleName = processingEnv.options["GADGET_ROUTE"]
+        val moduleName = processingEnv.options["G_PROJECT_NAME"]
         if (moduleName == null || moduleName.trim().isEmpty()) {
             return false
         }
@@ -32,7 +32,7 @@ class GadgetRouteProcessor : BaseGadgetProcessor() {
         val routeTable = HashMap<String, String>()
         roundEnvironment?.getElementsAnnotatedWith(G_Route::class.java)?.forEach { element ->
             val packageName = processingEnv.elementUtils.getPackageOf(element).qualifiedName.toString()
-            val elementName = element.simpleName
+            val elementName = element.simpleName.toString()
             val route = element.getAnnotation(G_Route::class.java)
             val path = route.path
             routeTable[path] = "$packageName.$elementName"
@@ -54,7 +54,7 @@ class GadgetRouteProcessor : BaseGadgetProcessor() {
     private fun getXxxRouteTableTypeSpec(moduleName: String, routeTable: HashMap<String, String>): TypeSpec {
         val mName = moduleName.toUpperCase().replace("-", "")
         return TypeSpec.classBuilder("${mName}_RouteTable")
-            .superclass(G_RouteTable::class.java)
+            .addSuperinterface(TaG_Route::class.java)
             .addModifiers(Modifier.PUBLIC)
             .addMethod(getRegisterMethodSpec(routeTable))
             .build()
@@ -66,7 +66,7 @@ class GadgetRouteProcessor : BaseGadgetProcessor() {
             .addModifiers(Modifier.PUBLIC)
             .addParameter(HashMap::class.java, "routeMap")
         routeTable.forEach { (path, route) ->
-            methodSpecBuilder.addStatement("routeMap.put(\$S, \$S)", path, route)
+            methodSpecBuilder.addStatement("routeMap.put(\"${path}\", \"${route}\")")
         }
         return methodSpecBuilder.build()
     }

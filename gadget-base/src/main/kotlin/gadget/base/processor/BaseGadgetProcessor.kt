@@ -16,6 +16,6 @@ abstract class BaseGadgetProcessor : AbstractProcessor() {
     override fun getSupportedSourceVersion(): SourceVersion = SourceVersion.latestSupported()
 
     override fun process(typeElementSet: Set<TypeElement>?, roundEnvironment: RoundEnvironment?): Boolean {
-        return typeElementSet != null
+        return typeElementSet != null && roundEnvironment != null
     }
 }

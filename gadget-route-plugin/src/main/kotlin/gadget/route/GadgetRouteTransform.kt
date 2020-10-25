@@ -22,7 +22,7 @@ class GadgetRouteTransform : BaseGadgetAppTransform(), GadgetRouteConstant {
         transformInvocation.inputs.parallelStream().forEach { transformInput ->
             transformInput.directoryInputs.parallelStream().forEach { handleDirInput(it, output) }
             transformInput.jarInputs.parallelStream().forEach {
-                if (it.name.contains(gadgetRouteApiJarName)) {
+                if (it.name.contains(_GadgetRouteApiJarName)) {
                     gadgetRouteJar = it
                 } else {
                     handleJarInput(it, output)

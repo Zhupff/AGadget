@@ -6,4 +6,4 @@ package gadget.dor
  */
 @Retention(AnnotationRetention.BINARY)
 @Target(AnnotationTarget.FIELD)
-annotation class G_LongDoR(val debug: Long, val release: Long, val beFinal: Boolean = false)
+annotation class G_LongDoR(val debug: Long, val release: Long)

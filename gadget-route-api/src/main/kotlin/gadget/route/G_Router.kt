@@ -10,12 +10,15 @@ object G_Router {
     private val mRouteTable: HashMap<String, String> = HashMap()
 
     init {
-        initRouteTable().forEach { it.register(mRouteTable)}
+        _getTaG_Route().forEach { it.register(mRouteTable)}
     }
 
-    private fun initRouteTable(): List<G_RouteTable> = emptyList()
+    /**
+     * If you pick gadgetRoutePlugin(), This method will be rewritten During Compilation.
+     */
+    private fun _getTaG_Route(): List<TaG_Route> = emptyList()
 
-    fun registerRouteTable(vararg table: G_RouteTable) {
-        table.forEach { it.register(mRouteTable) }
+    fun register(vararg route: TaG_Route) {
+        route.forEach { it.register(mRouteTable) }
     }
 }
