@@ -37,9 +37,9 @@ abstract class BaseGadgetTransform : Transform() {
     protected open fun getTransformers(): List<BaseGadgetTransformer> = emptyList()
 
     protected open fun handleTransformInvocation(transformInvocation: TransformInvocation, output: TransformOutputProvider) {
-        transformInvocation.inputs.parallelStream().forEach { transformInput ->
-            transformInput.directoryInputs.parallelStream().forEach { handleDirInput(it, output) }
-            transformInput.jarInputs.parallelStream().forEach { handleJarInput(it, output) }
+        transformInvocation.inputs.forEach { transformInput ->
+            transformInput.directoryInputs.forEach { handleDirInput(it, output) }
+            transformInput.jarInputs.forEach { handleJarInput(it, output) }
         }
     }
 

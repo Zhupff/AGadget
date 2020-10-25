@@ -7,16 +7,17 @@ package gadget.route
  */
 object G_Router {
 
+    /**
+     * If you pick gadgetRoutePlugin(), This method will be rewritten During Compilation.
+     */
+    private fun _getTaG_Route(): List<TaG_Route> = emptyList()
+
+
     private val mRouteTable: HashMap<String, String> = HashMap()
 
     init {
         _getTaG_Route().forEach { it.register(mRouteTable)}
     }
-
-    /**
-     * If you pick gadgetRoutePlugin(), This method will be rewritten During Compilation.
-     */
-    private fun _getTaG_Route(): List<TaG_Route> = emptyList()
 
     fun register(vararg route: TaG_Route) {
         route.forEach { it.register(mRouteTable) }

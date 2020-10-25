@@ -12,7 +12,6 @@ internal class GadgetDoRMV(mv: MethodVisitor, val mDorList: List<String>)
     : BaseGadgetMethodVisitor(mv) {
 
         override fun visitCode() {
-            println("GadgetDoRMV visitCode")
             mv.visitCode()
             mv.visitTypeInsn(Opcodes.NEW, "java/util/ArrayList")
             mv.visitInsn(Opcodes.DUP)
