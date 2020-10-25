@@ -1,5 +1,6 @@
 package gadget.route
 
+import com.google.auto.common.SuperficialValidation
 import com.google.auto.service.AutoService
 import com.squareup.javapoet.JavaFile
 import com.squareup.javapoet.MethodSpec
@@ -21,7 +22,7 @@ class GadgetRouteProcessor : BaseGadgetProcessor() {
     override fun getSupportedAnnotationTypes(): Set<String> = setOf(G_Route::class.java.canonicalName)
 
     override fun process(typeElementSet: Set<TypeElement>?, roundEnvironment: RoundEnvironment?): Boolean {
-        if (typeElementSet == null) {
+        if (typeElementSet == null || roundEnvironment == null) {
             return false
         }
         val moduleName = processingEnv.options["G_PROJECT_NAME"]
@@ -30,13 +31,16 @@ class GadgetRouteProcessor : BaseGadgetProcessor() {
         }
 
         val routeTable = HashMap<String, String>()
-        roundEnvironment?.getElementsAnnotatedWith(G_Route::class.java)?.forEach { element ->
-            val packageName = processingEnv.elementUtils.getPackageOf(element).qualifiedName.toString()
-            val elementName = element.simpleName.toString()
-            val route = element.getAnnotation(G_Route::class.java)
-            val path = route.path
-            routeTable[path] = "$packageName.$elementName"
-        }
+        roundEnvironment.getElementsAnnotatedWith(G_Route::class.java)
+            .filter { element ->
+                SuperficialValidation.validateElement(element)
+            }.forEach { element ->
+                val packageName = processingEnv.elementUtils.getPackageOf(element).qualifiedName.toString()
+                val elementName = element.simpleName.toString()
+                val route = element.getAnnotation(G_Route::class.java)
+                val path = route.path
+                routeTable[path] = "$packageName.$elementName"
+            }
         if (routeTable.isNullOrEmpty()) {
             return false
         }
@@ -53,7 +57,7 @@ class GadgetRouteProcessor : BaseGadgetProcessor() {
 
     private fun getXxxRouteTableTypeSpec(moduleName: String, routeTable: HashMap<String, String>): TypeSpec {
         val mName = moduleName.toUpperCase().replace("-", "")
-        return TypeSpec.classBuilder("${mName}_RouteTable")
+        return TypeSpec.classBuilder("${mName}_Route")
             .addSuperinterface(TaG_Route::class.java)
             .addModifiers(Modifier.PUBLIC)
             .addMethod(getRegisterMethodSpec(routeTable))

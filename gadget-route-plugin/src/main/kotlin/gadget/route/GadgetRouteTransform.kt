@@ -9,7 +9,6 @@ import gadget.base.plugin.asm.BaseGadgetTransformer
 /**
  * Author: Zhupf
  * E-mail: zhupfplus@gmail.com
- * Description:
  */
 class GadgetRouteTransform : BaseGadgetAppTransform(), GadgetRouteConstant {
 

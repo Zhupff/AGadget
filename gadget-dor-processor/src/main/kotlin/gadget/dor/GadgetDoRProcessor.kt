@@ -54,138 +54,147 @@ class GadgetDoRProcessor : BaseGadgetProcessor() {
     }
 
     private fun processG_ByteDoR(roundEnvironment: RoundEnvironment, fieldTable: HashMap<String, ArrayList<FieldDoR<*>>>) {
-        roundEnvironment.getElementsAnnotatedWith(G_ByteDoR::class.java).filter { element ->
-            SuperficialValidation.validateElement(element)
-        }.forEach { element ->
-            val classPath = getClassPath(element.enclosingElement)
-            val elementName = element.simpleName.toString()
-            val dor = element.getAnnotation(G_ByteDoR::class.java)
-            val fieldDoR = ByteFieldDoR(elementName, dor.debug, dor.release)
-            if (fieldTable[classPath] == null) {
-                fieldTable[classPath] = ArrayList()
+        roundEnvironment.getElementsAnnotatedWith(G_ByteDoR::class.java)
+            .filter { element ->
+                SuperficialValidation.validateElement(element)
+            }.forEach { element ->
+                val classPath = getClassPath(element.enclosingElement)
+                val elementName = element.simpleName.toString()
+                val dor = element.getAnnotation(G_ByteDoR::class.java)
+                val fieldDoR = ByteFieldDoR(elementName, dor.debug, dor.release)
+                if (fieldTable[classPath] == null) {
+                    fieldTable[classPath] = ArrayList()
+                }
+                fieldTable[classPath]?.add(fieldDoR)
             }
-            fieldTable[classPath]?.add(fieldDoR)
-        }
     }
 
     private fun processG_ShortDoR(roundEnvironment: RoundEnvironment, fieldTable: HashMap<String, ArrayList<FieldDoR<*>>>) {
-        roundEnvironment.getElementsAnnotatedWith(G_ShortDoR::class.java).filter { element ->
-            SuperficialValidation.validateElement(element)
-        }.forEach { element ->
-            val classPath = getClassPath(element.enclosingElement)
-            val elementName = element.simpleName.toString()
-            val dor = element.getAnnotation(G_ShortDoR::class.java)
-            val fieldDoR = ShortFieldDoR(elementName, dor.debug, dor.release)
-            if (fieldTable[classPath] == null) {
-                fieldTable[classPath] = ArrayList()
+        roundEnvironment.getElementsAnnotatedWith(G_ShortDoR::class.java)
+            .filter { element ->
+                SuperficialValidation.validateElement(element)
+            }.forEach { element ->
+                val classPath = getClassPath(element.enclosingElement)
+                val elementName = element.simpleName.toString()
+                val dor = element.getAnnotation(G_ShortDoR::class.java)
+                val fieldDoR = ShortFieldDoR(elementName, dor.debug, dor.release)
+                if (fieldTable[classPath] == null) {
+                    fieldTable[classPath] = ArrayList()
+                }
+                fieldTable[classPath]?.add(fieldDoR)
             }
-            fieldTable[classPath]?.add(fieldDoR)
-        }
     }
 
     private fun processG_IntDoR(roundEnvironment: RoundEnvironment, fieldTable: HashMap<String, ArrayList<FieldDoR<*>>>) {
-        roundEnvironment.getElementsAnnotatedWith(G_IntDoR::class.java).filter { element ->
-            SuperficialValidation.validateElement(element)
-        }.forEach { element ->
-            val classPath = getClassPath(element.enclosingElement)
-            val elementName = element.simpleName.toString()
-            val dor = element.getAnnotation(G_IntDoR::class.java)
-            val fieldDoR = IntFieldDoR(elementName, dor.debug, dor.release)
-            if (fieldTable[classPath] == null) {
-                fieldTable[classPath] = ArrayList()
+        roundEnvironment.getElementsAnnotatedWith(G_IntDoR::class.java)
+            .filter { element ->
+                SuperficialValidation.validateElement(element)
+            }.forEach { element ->
+                val classPath = getClassPath(element.enclosingElement)
+                val elementName = element.simpleName.toString()
+                val dor = element.getAnnotation(G_IntDoR::class.java)
+                val fieldDoR = IntFieldDoR(elementName, dor.debug, dor.release)
+                if (fieldTable[classPath] == null) {
+                    fieldTable[classPath] = ArrayList()
+                }
+                fieldTable[classPath]?.add(fieldDoR)
             }
-            fieldTable[classPath]?.add(fieldDoR)
-        }
     }
 
     private fun processG_LongDoR(roundEnvironment: RoundEnvironment, fieldTable: HashMap<String, ArrayList<FieldDoR<*>>>) {
-        roundEnvironment.getElementsAnnotatedWith(G_LongDoR::class.java).filter { element ->
-            SuperficialValidation.validateElement(element)
-        }.forEach { element ->
-            val classPath = getClassPath(element.enclosingElement)
-            val elementName = element.simpleName.toString()
-            val dor = element.getAnnotation(G_LongDoR::class.java)
-            val fieldDoR = LongFieldDoR(elementName, dor.debug, dor.release)
-            if (fieldTable[classPath] == null) {
-                fieldTable[classPath] = ArrayList()
+        roundEnvironment.getElementsAnnotatedWith(G_LongDoR::class.java)
+            .filter { element ->
+                SuperficialValidation.validateElement(element)
+            }.forEach { element ->
+                val classPath = getClassPath(element.enclosingElement)
+                val elementName = element.simpleName.toString()
+                val dor = element.getAnnotation(G_LongDoR::class.java)
+                val fieldDoR = LongFieldDoR(elementName, dor.debug, dor.release)
+                if (fieldTable[classPath] == null) {
+                    fieldTable[classPath] = ArrayList()
+                }
+                fieldTable[classPath]?.add(fieldDoR)
             }
-            fieldTable[classPath]?.add(fieldDoR)
-        }
     }
 
     private fun processG_FloatDoR(roundEnvironment: RoundEnvironment, fieldTable: HashMap<String, ArrayList<FieldDoR<*>>>) {
-        roundEnvironment.getElementsAnnotatedWith(G_FloatDoR::class.java).filter { element ->
-            SuperficialValidation.validateElement(element)
-        }.forEach { element ->
-            val classPath = getClassPath(element.enclosingElement)
-            val elementName = element.simpleName.toString()
-            val dor = element.getAnnotation(G_FloatDoR::class.java)
-            val fieldDoR = FloatFieldDoR(elementName, dor.debug, dor.release)
-            if (fieldTable[classPath] == null) {
-                fieldTable[classPath] = ArrayList()
+        roundEnvironment.getElementsAnnotatedWith(G_FloatDoR::class.java)
+            .filter { element ->
+                SuperficialValidation.validateElement(element)
+            }.forEach { element ->
+                val classPath = getClassPath(element.enclosingElement)
+                val elementName = element.simpleName.toString()
+                val dor = element.getAnnotation(G_FloatDoR::class.java)
+                val fieldDoR = FloatFieldDoR(elementName, dor.debug, dor.release)
+                if (fieldTable[classPath] == null) {
+                    fieldTable[classPath] = ArrayList()
+                }
+                fieldTable[classPath]?.add(fieldDoR)
             }
-            fieldTable[classPath]?.add(fieldDoR)
-        }
     }
 
     private fun processG_DoubleDoR(roundEnvironment: RoundEnvironment, fieldTable: HashMap<String, ArrayList<FieldDoR<*>>>) {
-        roundEnvironment.getElementsAnnotatedWith(G_DoubleDoR::class.java).filter { element ->
-            SuperficialValidation.validateElement(element)
-        }.forEach { element ->
-            val classPath = getClassPath(element.enclosingElement)
-            val elementName = element.simpleName.toString()
-            val dor = element.getAnnotation(G_DoubleDoR::class.java)
-            val fieldDoR = DoubleFieldDoR(elementName, dor.debug, dor.release)
-            if (fieldTable[classPath] == null) {
-                fieldTable[classPath] = ArrayList()
+        roundEnvironment.getElementsAnnotatedWith(G_DoubleDoR::class.java)
+            .filter { element ->
+                SuperficialValidation.validateElement(element)
+            }.forEach { element ->
+                val classPath = getClassPath(element.enclosingElement)
+                val elementName = element.simpleName.toString()
+                val dor = element.getAnnotation(G_DoubleDoR::class.java)
+                val fieldDoR = DoubleFieldDoR(elementName, dor.debug, dor.release)
+                if (fieldTable[classPath] == null) {
+                    fieldTable[classPath] = ArrayList()
+                }
+                fieldTable[classPath]?.add(fieldDoR)
             }
-            fieldTable[classPath]?.add(fieldDoR)
-        }
     }
 
     private fun processG_BooleanDoR(roundEnvironment: RoundEnvironment, fieldTable: HashMap<String, ArrayList<FieldDoR<*>>>) {
-        roundEnvironment.getElementsAnnotatedWith(G_BooleanGoR::class.java).filter { element ->
-            SuperficialValidation.validateElement(element)
-        }.forEach { element ->
-            val classPath = getClassPath(element.enclosingElement)
-            val elementName = element.simpleName.toString()
-            val dor = element.getAnnotation(G_BooleanGoR::class.java)
-            val fieldDoR = BooleanFieldDoR(elementName, dor.debug, dor.release)
-            if (fieldTable[classPath] == null) {
-                fieldTable[classPath] = ArrayList()
+        roundEnvironment.getElementsAnnotatedWith(G_BooleanGoR::class.java)
+            .filter { element ->
+                SuperficialValidation.validateElement(element)
+            }.forEach { element ->
+                val classPath = getClassPath(element.enclosingElement)
+                val elementName = element.simpleName.toString()
+                val dor = element.getAnnotation(G_BooleanGoR::class.java)
+                val fieldDoR = BooleanFieldDoR(elementName, dor.debug, dor.release)
+                if (fieldTable[classPath] == null) {
+                    fieldTable[classPath] = ArrayList()
+                }
+                fieldTable[classPath]?.add(fieldDoR)
             }
-            fieldTable[classPath]?.add(fieldDoR)
-        }
     }
 
     private fun processG_CharDoR(roundEnvironment: RoundEnvironment, fieldTable: HashMap<String, ArrayList<FieldDoR<*>>>) {
-        roundEnvironment.getElementsAnnotatedWith(G_CharDoR::class.java).filter { element ->
-            SuperficialValidation.validateElement(element)
-        }.forEach { element ->
-            val classPath = getClassPath(element.enclosingElement)
-            val elementName = element.simpleName.toString()
-            val dor = element.getAnnotation(G_CharDoR::class.java)
-            val fieldDoR = CharFieldDoR(elementName, dor.debug, dor.release)
-            if (fieldTable[classPath] == null) {
-                fieldTable[classPath] = ArrayList()
+        roundEnvironment.getElementsAnnotatedWith(G_CharDoR::class.java)
+            .filter { element ->
+                SuperficialValidation.validateElement(element)
+            }.forEach { element ->
+                val classPath = getClassPath(element.enclosingElement)
+                val elementName = element.simpleName.toString()
+                val dor = element.getAnnotation(G_CharDoR::class.java)
+                val fieldDoR = CharFieldDoR(elementName, dor.debug, dor.release)
+                if (fieldTable[classPath] == null) {
+                    fieldTable[classPath] = ArrayList()
+                }
+                fieldTable[classPath]?.add(fieldDoR)
             }
-            fieldTable[classPath]?.add(fieldDoR)
-        }
     }
 
     private fun processG_StringDoR(roundEnvironment: RoundEnvironment, fieldTable: HashMap<String, ArrayList<FieldDoR<*>>>) {
-        roundEnvironment.getElementsAnnotatedWith(G_StringDoR::class.java).filter { element ->
-            SuperficialValidation.validateElement(element)
-        }.forEach { element ->
-            val classPath = getClassPath(element.enclosingElement)
-            val elementName = element.simpleName.toString()
-            val dor = element.getAnnotation(G_StringDoR::class.java)
-            val fieldDoR = StringFieldDoR(elementName, dor.debug, dor.release)
-            if (fieldTable[classPath] == null) {
-                fieldTable[classPath] = ArrayList()
+        roundEnvironment.getElementsAnnotatedWith(G_StringDoR::class.java)
+            .filter { element ->
+                SuperficialValidation.validateElement(element)
+            }.forEach { element ->
+                val classPath = getClassPath(element.enclosingElement)
+                val elementName = element.simpleName.toString()
+                val dor = element.getAnnotation(G_StringDoR::class.java)
+                val fieldDoR = StringFieldDoR(elementName, dor.debug, dor.release)
+                if (fieldTable[classPath] == null) {
+                    fieldTable[classPath] = ArrayList()
+                }
+                fieldTable[classPath]?.add(fieldDoR)
             }
-            fieldTable[classPath]?.add(fieldDoR)
-        }
     }
 
     private fun getClassPath(element: Element): String {
