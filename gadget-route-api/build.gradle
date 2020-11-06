@@ -4,5 +4,6 @@ DepHelper.build {
     gadgetApiGradle()
     jitpackPublishGradle()
 
+    gadgetCommonLib()
     gadgetRouteAnnotation()
 }
