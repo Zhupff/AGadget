@@ -10,7 +10,7 @@ import gadget.base.plugin.asm.BaseGadgetTransformer
  * Author: Zhupf
  * E-mail: zhupfplus@gmail.com
  */
-class GadgetDoRTransform : BaseGadgetAppTransform(), GadgetDoRConstant {
+class GadgetDoRTransform : BaseGadgetAppTransform() {
 
     override fun getTransformers(): List<BaseGadgetTransformer> {
         return listOf(GadgetDoRTransformer())
@@ -21,7 +21,7 @@ class GadgetDoRTransform : BaseGadgetAppTransform(), GadgetDoRConstant {
         transformInvocation.inputs.forEach { transformInput ->
             transformInput.directoryInputs.forEach { handleDirInput(it, output) }
             transformInput.jarInputs.forEach {
-                if (it.name.contains(_GadgetDoRAnnotationJarName)) {
+                if (it.name.contains(GadgetDoRConstant._GadgetDoRAnnotationJarName)) {
                     gadgetDoRJar = it
                 } else {
                     handleJarInput(it, output)

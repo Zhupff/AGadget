@@ -127,6 +127,23 @@ class GadgetBox {
         /** Inject gadget-dor. **/
 
 
+        /** Inject gadget-log. **/
+        def gadgetLog() {
+            if (!mIsApplicationModule && !mIsAndroidLibraryModule) {
+                throw new IllegalStateException(
+                    "gadgetLog() can only be picked on Application-module or Android-library-module.")
+            }
+            try {
+                mProject.dependencies {
+                    implementation GadgetInfo.GADGET_LOG_API
+                }
+            } catch (Exception e) {
+                e.printStackTrace()
+            }
+        }
+        /** Inject gadget-log. **/
+
+
         /** Inject gadget-route. **/
         def gadgetRoute() {
             if (!mIsApplicationModule && !mIsAndroidLibraryModule) {

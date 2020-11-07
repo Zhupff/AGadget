@@ -11,6 +11,8 @@ include ':gadget-dor-annotation'
 include ':gadget-dor-processor'
 include ':gadget-dor-plugin'
 
+include ':gadget-log-api'
+
 include ':gadget-route-processor'
 include ':gadget-route-annotation'
 include ':gadget-route-plugin'

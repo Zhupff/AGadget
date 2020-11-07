@@ -4,13 +4,14 @@ package gadget.dor
  * Author: Zhupf
  * E-mail: zhupfplus@gmail.com
  */
-internal interface GadgetDoRConstant {
+internal class GadgetDoRConstant private constructor() {
+    companion object {
+        const val _GadgetDoRAnnotationJarName: String = "gadget-dor-annotation"
 
-    val _GadgetDoRAnnotationJarName: String get() = "gadget-dor-annotation"
+        const val _TaG_DoR: String = "gadget/dor/TaG_DoR"
 
-    val _TaG_DoR: String get() = "gadget/dor/TaG_DoR"
+        const val _G_DoR: String = "gadget/dor/G_DoR"
 
-    val _G_DoR: String get() = "gadget/dor/G_DoR"
-
-    val _getTaG_DoR: String get() = "_getTaG_DoR"
+        const val _getTaG_DoR: String = "_getTaG_DoR"
+    }
 }

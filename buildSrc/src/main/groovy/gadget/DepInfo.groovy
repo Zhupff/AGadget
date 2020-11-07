@@ -14,6 +14,7 @@ class DepInfo {
     static final String GADGET_DOR_ANNOTATION = ":gadget-dor-annotation"
     static final String GADGET_DOR_PLUGIN = ":gadget-dor-plugin"
     static final String GADGET_DOR_PROCESSOR = ":gadget-dor-processor"
+    static final String GADGET_LOG_API = ":gadget-log-api"
     static final String GADGET_ROUTE_ANNOTATION = ":gadget-route-annotation"
     static final String GADGET_ROUTE_API = ":gadget-route-api"
     static final String GADGET_ROUTE_PLUGIN = ":gadget-route-plugin"

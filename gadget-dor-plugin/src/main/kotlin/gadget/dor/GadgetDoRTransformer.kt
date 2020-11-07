@@ -10,7 +10,7 @@ import java.util.concurrent.CopyOnWriteArrayList
  * Author: Zhupf
  * E-mail: zhupfplus@gmail.com
  */
-internal class GadgetDoRTransformer : BaseGadgetTransformer(), GadgetDoRConstant {
+internal class GadgetDoRTransformer : BaseGadgetTransformer() {
 
     private val mDorList: CopyOnWriteArrayList<String> = CopyOnWriteArrayList()
 
@@ -19,12 +19,12 @@ internal class GadgetDoRTransformer : BaseGadgetTransformer(), GadgetDoRConstant
         val cn = ClassNode()
         cr.accept(cn, ClassReader.EXPAND_FRAMES)
 
-        if (cn.name == _G_DoR) {
+        if (cn.name == GadgetDoRConstant._G_DoR) {
             val cw = ClassWriter(cr, ClassWriter.COMPUTE_MAXS)
             val cv = GadgetDoRCV(cw, mDorList)
             cr.accept(cv, ClassReader.EXPAND_FRAMES)
             return cw.toByteArray()
-        } else if (cn.interfaces.contains(_TaG_DoR)) {
+        } else if (cn.interfaces.contains(GadgetDoRConstant._TaG_DoR)) {
             mDorList.add(cn.name)
         }
         return super.transformClass(classBytes)

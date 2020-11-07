@@ -10,7 +10,7 @@ import gadget.base.plugin.asm.BaseGadgetTransformer
  * Author: Zhupf
  * E-mail: zhupfplus@gmail.com
  */
-class GadgetRouteTransform : BaseGadgetAppTransform(), GadgetRouteConstant {
+class GadgetRouteTransform : BaseGadgetAppTransform() {
 
     override fun getTransformers(): List<BaseGadgetTransformer> {
         return listOf(GadgetRouteTransformer())
@@ -21,7 +21,7 @@ class GadgetRouteTransform : BaseGadgetAppTransform(), GadgetRouteConstant {
         transformInvocation.inputs.forEach { transformInput ->
             transformInput.directoryInputs.forEach { handleDirInput(it, output) }
             transformInput.jarInputs.forEach {
-                if (it.name.contains(_GadgetRouteApiJarName)) {
+                if (it.name.contains(GadgetRouteConstant._GadgetRouteApiJarName)) {
                     gadgetRouteJar = it
                 } else {
                     handleJarInput(it, output)

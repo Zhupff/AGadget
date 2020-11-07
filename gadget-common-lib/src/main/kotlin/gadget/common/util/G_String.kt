@@ -1,4 +1,4 @@
-package gadget.common
+package gadget.common.util
 
 /**
  * Author: Zhupf

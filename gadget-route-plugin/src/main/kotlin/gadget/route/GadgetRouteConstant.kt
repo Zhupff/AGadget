@@ -4,15 +4,16 @@ package gadget.route
  * Author: Zhupf
  * E-mail: zhupfplus@gmail.com
  */
-internal interface GadgetRouteConstant {
+internal class GadgetRouteConstant private constructor() {
+    companion object {
+        const val _GadgetRouteApiJarName: String = "gadget-route-api"
 
-    val _GadgetRouteApiJarName: String get() = "gadget-route-api"
+        const val _GadgetRoutePackage: String = "gadget/route/"
 
-    val _GadgetRoutePackage: String get() = "gadget/route/"
+        const val _TaG_Route: String = "gadget/route/TaG_Route"
 
-    val _TaG_Route: String get() = "gadget/route/TaG_Route"
+        const val _G_Router: String = "gadget/route/G_Router"
 
-    val _G_Router: String get() = "gadget/route/G_Router"
-
-    val _getTaG_Route: String get() = "_getTaG_Route"
+        const val _getTaG_Route: String = "_getTaG_Route"
+    }
 }

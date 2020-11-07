@@ -10,7 +10,7 @@ import java.util.concurrent.CopyOnWriteArrayList
  * Author: Zhupf
  * E-mail: zhupfplus@gmail.com
  */
-internal class GadgetRouteTransformer : BaseGadgetTransformer(), GadgetRouteConstant {
+internal class GadgetRouteTransformer : BaseGadgetTransformer() {
 
     private val mRouteTableList: CopyOnWriteArrayList<String> = CopyOnWriteArrayList()
 
@@ -19,13 +19,13 @@ internal class GadgetRouteTransformer : BaseGadgetTransformer(), GadgetRouteCons
         val cn = ClassNode()
         cr.accept(cn, ClassReader.EXPAND_FRAMES)
 
-        if (cn.name.startsWith(_GadgetRoutePackage)) {
-            if (cn.name == _G_Router) {
+        if (cn.name.startsWith(GadgetRouteConstant._GadgetRoutePackage)) {
+            if (cn.name == GadgetRouteConstant._G_Router) {
                 val cw = ClassWriter(cr, ClassWriter.COMPUTE_MAXS)
                 val cv = GadgetRouteCV(cw, mRouteTableList)
                 cr.accept(cv, ClassReader.EXPAND_FRAMES)
                 return cw.toByteArray()
-            } else if (cn.interfaces.contains(_TaG_Route)) {
+            } else if (cn.interfaces.contains(GadgetRouteConstant._TaG_Route)) {
                 mRouteTableList.add(cn.name)
             }
         }

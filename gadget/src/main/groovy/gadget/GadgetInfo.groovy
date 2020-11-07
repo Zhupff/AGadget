@@ -17,6 +17,7 @@ class GadgetInfo {
     static final String GADGET_DOR_ANNOTATION = "com.github.zhupff.agadget:gadget-dor-annotation:0.0.1"
     static final String GADGET_DOR_PLUGIN = "com.github.zhupff.agadget:gadget-dor-plugin:0.0.1"
     static final String GADGET_DOR_PROCESSOR = "com.github.zhupff.agadget:gadget-dor-processor:0.0.1"
+    static final String GADGET_LOG_API = "com.github.zhupff.agadget:gadget-log-api:0.0.1"
     static final String GADGET_ROUTE_ANNOTATION = "com.github.zhupff.agadget:gadget-route-annotation:0.0.1"
     static final String GADGET_ROUTE_API = "com.github.zhupff.agadget:gadget-route-api:0.0.1"
     static final String GADGET_ROUTE_PLUGIN = "com.github.zhupff.agadget:gadget-route-plugin:0.0.1"

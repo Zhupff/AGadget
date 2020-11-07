@@ -1,6 +1,6 @@
 package gadget.base.plugin.asm
 
-import gadget.base.common.Constant
+import gadget.base.common.GadgetConstant
 import jdk.internal.org.objectweb.asm.ClassVisitor
 import jdk.internal.org.objectweb.asm.Opcodes
 
@@ -8,13 +8,13 @@ import jdk.internal.org.objectweb.asm.Opcodes
  * Author: Zhupf
  * E-mail: zhupfplus@gmail.com
  */
-abstract class BaseGadgetClassVisitor(cv: ClassVisitor) : ClassVisitor(Opcodes.ASM5, cv), Constant {
+abstract class BaseGadgetClassVisitor(cv: ClassVisitor) : ClassVisitor(Opcodes.ASM5, cv) {
 
-    protected var mClassVersion: Int = defInt
-    protected var mClassAccess: Int = defInt
-    protected var mClassName: String? = defString
-    protected var mClassSignature: String? = defString
-    protected var mClassSuperName: String? = defString
+    protected var mClassVersion: Int = GadgetConstant.defInt
+    protected var mClassAccess: Int = GadgetConstant.defInt
+    protected var mClassName: String? = GadgetConstant.defString
+    protected var mClassSignature: String? = GadgetConstant.defString
+    protected var mClassSuperName: String? = GadgetConstant.defString
     protected var mClassInterfaces: Array<String>? = emptyArray()
 
     override fun visit(version: Int, access: Int, name: String?, signature: String?, superName: String?, interfaces: Array<String>?) {
