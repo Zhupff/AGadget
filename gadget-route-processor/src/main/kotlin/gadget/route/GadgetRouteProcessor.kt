@@ -5,6 +5,7 @@ import com.google.auto.service.AutoService
 import com.squareup.javapoet.JavaFile
 import com.squareup.javapoet.MethodSpec
 import com.squareup.javapoet.TypeSpec
+import gadget.base.common.GadgetConstant
 import gadget.base.processor.BaseGadgetProcessor
 import javax.annotation.processing.Processor
 import javax.annotation.processing.RoundEnvironment
@@ -25,7 +26,7 @@ class GadgetRouteProcessor : BaseGadgetProcessor() {
         if (typeElementSet == null || roundEnvironment == null) {
             return false
         }
-        val moduleName = processingEnv.options["G_PROJECT_NAME"]
+        val moduleName = processingEnv.options[GadgetConstant.G_PROJECT_NAME]
         if (moduleName == null || moduleName.trim().isEmpty()) {
             return false
         }

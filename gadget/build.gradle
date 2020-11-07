@@ -5,6 +5,7 @@ DepBuilder.build {
     createGadgetInfoGradle()
     jitpackPublishGradle()
 
+    gadgetBase()
     gadgetDoRPlugin()
     gadgetRoutePlugin()
 }

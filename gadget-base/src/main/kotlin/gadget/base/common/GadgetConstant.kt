@@ -7,23 +7,25 @@ package gadget.base.common
 class GadgetConstant private constructor() {
     companion object {
 
-        const val defUnsignedByte: Byte = 0
-        const val defByte: Byte = -73
+        const val DEF_UNSIGNED_BYTE: Byte = 0
+        const val DEF_BYTE: Byte = -73
 
-        const val defUnsignedShort: Short = 0
-        const val defShort: Short = -73
+        const val DEF_UNSIGNED_SHORT: Short = 0
+        const val DEF_SHORT: Short = -73
 
-        const val defUnsignedInt: Int = 0
-        const val defInt: Int = -73
+        const val DEF_UNSIGNED_INT: Int = 0
+        const val DEF_INT: Int = -73
 
-        const val defUnsignedLong: Long = 0L
-        const val defLong: Long = -73L
+        const val DEF_UNSIGNED_LONG: Long = 0L
+        const val DEF_LONG: Long = -73L
 
-        const val defChar: Char = ' '
+        const val DEF_CHAR: Char = ' '
 
-        const val defString: String = ""
-        const val defNullString: String = "NULL"
-        const val defStringUnsignedNum: String = "0"
-        const val defStringNum: String = "-73"
+        const val DEF_STRING: String = ""
+        const val DEF_NULL_STRING: String = "NULL"
+        const val DEF_STRING_UNSIGNED_NUM: String = "0"
+        const val DEF_STRING_NUM: String = "-73"
+
+        const val G_PROJECT_NAME = "G_PROJECT_NAME"
     }
 }

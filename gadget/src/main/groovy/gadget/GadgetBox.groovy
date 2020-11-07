@@ -1,5 +1,6 @@
 package gadget
 
+import gadget.base.common.GadgetConstant
 import gadget.dor.GadgetDoRPlugin
 import gadget.route.GadgetRoutePlugin
 import org.gradle.api.Project
@@ -41,7 +42,7 @@ class GadgetBox {
             try {
                 if (mIsApplicationModule || mIsAndroidLibraryModule) {
                     mProject.android.defaultConfig.javaCompileOptions.annotationProcessorOptions {
-                        arguments.put("G_PROJECT_NAME", mProject.name)
+                        arguments.put(GadgetConstant.G_PROJECT_NAME, mProject.name)
                     }
                 }
             } catch (Exception e) {
