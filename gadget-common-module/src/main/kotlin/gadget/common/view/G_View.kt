@@ -1,4 +1,4 @@
-package gadget.common
+package gadget.common.view
 
 import android.view.View
 import androidx.annotation.MainThread

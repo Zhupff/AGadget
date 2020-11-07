@@ -1,6 +1,6 @@
-import gadget.DepHelper
+import gadget.DepBuilder
 
-DepHelper.build {
+DepBuilder.build {
     gadgetProcessorGradle()
     jitpackPublishGradle()
 

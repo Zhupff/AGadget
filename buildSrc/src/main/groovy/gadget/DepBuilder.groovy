@@ -2,19 +2,19 @@ package gadget
 
 import org.gradle.api.Project
 
-class DepHelper {
-    private DepHelper() {}
+class DepBuilder {
+    private DepBuilder() {}
 
-    def static build(@DelegatesTo(DepBuilder.class) Closure closure) {
-        closure.delegate = new DepBuilder(closure.owner)
+    def static build(@DelegatesTo(_DepBuilder.class) Closure closure) {
+        closure.delegate = new _DepBuilder(closure.owner)
         closure()
     }
 
 
-    private static class DepBuilder {
+    private static class _DepBuilder {
         @Delegate Project mProject
 
-        private DepBuilder(script) {
+        private _DepBuilder(script) {
             mProject = script.project
         }
 

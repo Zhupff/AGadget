@@ -19,7 +19,7 @@ allprojects {
     }
 }
 
-gadget.DepHelper.build {
+gadget.DepBuilder.build {
     createDepInfoGradle()
 }
 
