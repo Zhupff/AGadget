@@ -1,0 +1,31 @@
+task createGadgetInfo() {
+    new File("${rootProject.projectDir.path}/gadget/src/main/groovy/gadget/GadgetInfo.groovy")
+        .text = new StringBuilder()
+        .append("/* Do Not Modify! Do Not Modify! Do Not Modify! */\n")
+        .append("/* This File Is Generated Automatically! */\n")
+        .append("\n")
+        .append("package gadget\n")
+        .append("\n")
+        .append("final class GadgetInfo {\n")
+        .append("private GadgetInfo() {}\n")
+        .append(getGroupVersion())
+        .append(getProjectInfo())
+        .append("}")
+}
+
+def getGroupVersion() {
+    StringBuilder sb = new StringBuilder()
+        .append("static final String GROUP = \"${GADGET_GROUP}\"\n")
+        .append("static final String VERSION = \"${GADGET_VERSION}\"\n")
+    return sb.toString()
+}
+
+def getProjectInfo() {
+    StringBuilder sb = new StringBuilder()
+    rootProject.subprojects.each { p ->
+        String projectName = p.name
+        String defName = projectName.replace("-", "_").toUpperCase()
+        sb.append("static final String ${defName} = \"${GADGET_GROUP}:${projectName}:${GADGET_VERSION}\"\n")
+    }
+    return sb.toString()
+}

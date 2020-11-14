@@ -1,22 +1,5 @@
+include ':gadget-common-module'
+include ':gadget-common-lib'
 include ':gadget'
 include ':gadget-base'
-
-include ':gadget-common-lib'
-include ':gadget-common-module'
-
-include ':gadget-convert-annotation'
-include ':gadget-convert-processor'
-
-include ':gadget-dor-annotation'
-include ':gadget-dor-processor'
-include ':gadget-dor-plugin'
-
-include ':gadget-log-api'
-
-include ':gadget-route-processor'
-include ':gadget-route-annotation'
-include ':gadget-route-plugin'
-include ':gadget-route-api'
-
-include ':sample'
 rootProject.name = "agadget-project"

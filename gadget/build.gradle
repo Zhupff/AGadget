@@ -1,11 +1,6 @@
 import gadget.DepBuilder
 
 DepBuilder.build {
-    gadgetPluginGradle()
-    createGadgetInfoGradle()
-    jitpackPublishGradle()
-
-    gadgetBase()
-    gadgetDoRPlugin()
-    gadgetRoutePlugin()
+    gadgetBaseGradle()
+    publishGradle()
 }

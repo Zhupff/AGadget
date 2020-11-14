@@ -1,6 +1,6 @@
 import gadget.DepBuilder
 
 DepBuilder.build {
-    gadgetBaseGradle()
-    jitpackPublishGradle()
+    gadgetJavaLibGradle()
+    publishGradle()
 }

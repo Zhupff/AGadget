@@ -18,91 +18,45 @@ class DepBuilder {
             mProject = script.project
         }
 
-        /* Build.gradle */
+        /** Build gradle **/
 
-        def gadgetSampleGradle() {
-            apply from: rootProject.file(".script/gadget_sample.gradle")
+        def publishGradle(toRemote = false) {
+            if (toRemote) {
+                apply from: rootProject.file(".script/publish-jitpack.gradle")
+            } else {
+                apply from: rootProject.file(".script/publish-local.gradle")
+            }
         }
 
         def gadgetBaseGradle() {
-            apply from: rootProject.file(".script/gadget_base.gradle")
+            apply from: rootProject.file(".script/gadget-base.gradle")
         }
 
-        def gadgetPluginGradle() {
-            apply from: rootProject.file(".script/gadget_plugin.gradle")
+        def gadgetAndroidLibGradle() {
+            apply from: rootProject.file(".script/gadget-android-lib.gradle")
         }
 
-        def gadgetApiGradle() {
-            apply from: rootProject.file(".script/gadget_api.gradle")
+        def gadgetJavaLibGradle() {
+            apply from: rootProject.file(".script/gadget-java-lib.gradle")
         }
 
-        def gadgetAnnotationGradle() {
-            apply from: rootProject.file(".script/gadget_annotation.gradle")
+        def createDepInfo() {
+            apply from: rootProject.file(".script/task-create-DepInfo.gradle")
         }
 
-        def gadgetProcessorGradle() {
-            apply from: rootProject.file(".script/gadget_processor.gradle")
+        def createGadgetInfo() {
+            apply from: rootProject.file(".script/task-create-GadgetInfo.gradle")
         }
 
-        def createDepInfoGradle() {
-            apply from: rootProject.file(".script/create_dep_info.gradle")
+        def createGBaseInfo() {
+            apply from: rootProject.file(".script/task-create-GBaseInfo.gradle")
         }
 
-        def createGadgetInfoGradle() {
-            apply from: rootProject.file(".script/create_gadget_info.gradle")
-        }
-
-        def jitpackPublishGradle() {
-            apply from: rootProject.file(".script/jitpack_publish.gradle")
-        }
-
-        /* Module dependency */
-
-        def gadgetBase() {
-            dependencies {
-                implementation project(DepInfo.GADGET_BASE)
-            }
-        }
+        /** Dependency gradle **/
 
         def gadgetCommonLib() {
             dependencies {
                 implementation project(DepInfo.GADGET_COMMON_LIB)
-            }
-        }
-
-        def gadgetCommonModule() {
-            dependencies {
-                implementation project(DepInfo.GADGET_COMMON_MODULE)
-            }
-        }
-
-        def gadgetConvertAnnotation() {
-            dependencies {
-                implementation project(DepInfo.GADGET_CONVERT_ANNOTATION)
-            }
-        }
-
-        def gadgetDoRAnnotation() {
-            dependencies {
-                implementation project(DepInfo.GADGET_DOR_ANNOTATION)
-            }
-        }
-
-        def gadgetDoRPlugin() {
-            dependencies {
-                implementation project(DepInfo.GADGET_DOR_PLUGIN)
-            }
-        }
-
-        def gadgetRouteAnnotation() {
-            dependencies {
-                implementation project(DepInfo.GADGET_ROUTE_ANNOTATION)
-            }
-        }
-
-        def gadgetRoutePlugin() {
-            dependencies {
-                implementation project(DepInfo.GADGET_ROUTE_PLUGIN)
             }
         }
     }

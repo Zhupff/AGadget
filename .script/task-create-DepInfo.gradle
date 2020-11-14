@@ -1,0 +1,23 @@
+task createDepInfo() {
+    new File("${rootProject.projectDir.path}/buildSrc/src/main/groovy/gadget/DepInfo.groovy")
+        .text = new StringBuilder()
+        .append("/* Do Not Modify! Do Not Modify! Do Not Modify! */\n")
+        .append("/* This File Is Generated Automatically! */\n")
+        .append("\n")
+        .append("package gadget\n")
+        .append("\n")
+        .append("final class DepInfo {\n")
+        .append("private DepInfo() {}\n")
+        .append(getProjectInfo())
+        .append("}")
+}
+
+def getProjectInfo() {
+    StringBuilder sb = new StringBuilder()
+    rootProject.subprojects.each { p ->
+        String projectName = p.name
+        String defName = projectName.replace("-", "_").toUpperCase()
+        sb.append("static final String ${defName} = \":${projectName}\"\n")
+    }
+    return sb.toString()
+}

@@ -1,0 +1,15 @@
+task createBaseInfo() {
+    new File("${rootProject.projectDir.path}/gadget-base/src/main/kotlin/gadget/base/GBaseInfo.kt")
+        .text = new StringBuilder()
+        .append("/* Do Not Modify! Do Not Modify! Do Not Modify! */\n")
+        .append("/* This File Is Generated Automatically! */\n")
+        .append("\n")
+        .append("package gadget.base\n")
+        .append("\n")
+        .append("class GBaseInfo private constructor() {\n")
+        .append("companion object {\n")
+        .append("const val GROUP: String =\"${GADGET_GROUP}\"\n")
+        .append("const val VERSION: String =\"${GADGET_VERSION}\"\n")
+        .append("}")
+        .append("}")
+}
