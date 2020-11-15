@@ -1,5 +1,7 @@
-include ':gadget-common-module'
-include ':gadget-common-lib'
+rootProject.name = "agadget-project"
+
 include ':gadget'
 include ':gadget-base'
-rootProject.name = "agadget-project"
+
+include ':gadget-common-lib'
+include ':gadget-common-module'

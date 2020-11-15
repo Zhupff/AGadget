@@ -5,7 +5,6 @@ import org.gradle.api.Project
 /**
  * Author: Zhupf
  * E-mail: zhupfplus@gmail.com
- * Description: Gradle dependencies inject helper.
  */
 class GadgetBox {
     private GadgetBox() {}
@@ -32,6 +31,20 @@ class GadgetBox {
             mIsKt = isKt
             mIsApplicationModule = mProject.plugins.hasPlugin("com.android.application")
             mIsAndroidLibraryModule = mProject.plugins.hasPlugin("com.android.library")
+            openGadgetBox()
+        }
+
+        private def openGadgetBox() {
+            if (!mIsApplicationModule && !mIsAndroidLibraryModule) {
+                throw new IllegalStateException("GadgetBox can only work in Android Application or Library.")
+            }
+            try {
+                mProject.android.defaultConfig.javaCompileOptions.annotationProcessorOptions {
+                    arguments.put(GadgetConstant.G_PROJECT_NAME, mProject.name)
+                }
+            } catch (Exception e) {
+                e.printStackTrace()
+            }
         }
     }
 }

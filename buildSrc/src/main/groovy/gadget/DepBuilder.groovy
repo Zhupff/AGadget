@@ -54,6 +54,12 @@ class DepBuilder {
 
         /** Dependency gradle **/
 
+        def gadgetBase() {
+            dependencies {
+                implementation project(DepInfo.GADGET_BASE)
+            }
+        }
+
         def gadgetCommonLib() {
             dependencies {
                 implementation project(DepInfo.GADGET_COMMON_LIB)

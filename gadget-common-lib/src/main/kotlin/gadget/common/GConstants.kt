@@ -8,6 +8,8 @@ package gadget.common
 abstract class GConstants private constructor() {
     companion object {
 
+        /** Default const val **/
+
         const val DEF_UNSIGNED_BYTE: Byte = 0
         const val DEF_BYTE: Byte = -73
 
@@ -34,5 +36,11 @@ abstract class GConstants private constructor() {
         const val DEF_NULL_STRING: String = "null"
         const val DEF_STRING_UNSIGNED_NUM: String = "0"
         const val DEF_STRING_NUM: String = "-73"
+
+
+        /** File const val **/
+
+        const val GADGET_AUTO_DIR = "/gadget/auto"
+        const val GADGET_AUTO_PACKAGE = "gadget.auto"
     }
 }
