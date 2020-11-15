@@ -40,6 +40,10 @@ class DepBuilder {
             apply from: rootProject.file(".script/gadget-java-lib.gradle")
         }
 
+        def gadgetCompileGradle() {
+            apply from: rootProject.file(".script/gadget-compile.gradle")
+        }
+
         def createDepInfo() {
             apply from: rootProject.file(".script/task-create-DepInfo.gradle")
         }
@@ -63,6 +67,12 @@ class DepBuilder {
         def gadgetCommonLib() {
             dependencies {
                 implementation project(DepInfo.GADGET_COMMON_LIB)
+            }
+        }
+
+        def gadgetDoRLib() {
+            dependencies {
+                implementation project(DepInfo.GADGET_DOR_LIB)
             }
         }
     }

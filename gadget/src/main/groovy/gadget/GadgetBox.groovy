@@ -1,5 +1,6 @@
 package gadget
 
+import gadget.common.GConstants
 import org.gradle.api.Project
 
 /**
@@ -40,11 +41,32 @@ class GadgetBox {
             }
             try {
                 mProject.android.defaultConfig.javaCompileOptions.annotationProcessorOptions {
-                    arguments.put(GadgetConstant.G_PROJECT_NAME, mProject.name)
+                    arguments.put(GConstants.COMPILE_OPTION_PROJECT_NAME, mProject.name)
                 }
             } catch (Exception e) {
                 e.printStackTrace()
             }
         }
+
+
+        /** Inject gadget-dor. **/
+        def gadgetDoR() {
+            try {
+                if (!mIsKt) {
+                    mProject.dependencies {
+                        implementation GadgetInfo.GADGET_DOR_LIB
+                        annotationProcessor GadgetInfo.GADGET_DOR_COMPILE
+                    }
+                } else {
+                    mProject.dependencies {
+                        implementation GadgetInfo.GADGET_DOR_LIB
+                        kapt GadgetInfo.GADGET_DOR_COMPILE
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace()
+            }
+        }
+        /** Inject gadget-dor. **/
     }
 }

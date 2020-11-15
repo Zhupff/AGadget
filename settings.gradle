@@ -5,3 +5,6 @@ include ':gadget-base'
 
 include ':gadget-common-lib'
 include ':gadget-common-module'
+
+include ':gadget-dor-compile'
+include ':gadget-dor-lib'

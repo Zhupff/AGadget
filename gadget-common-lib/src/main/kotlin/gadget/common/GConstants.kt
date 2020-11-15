@@ -40,7 +40,10 @@ abstract class GConstants private constructor() {
 
         /** File const val **/
 
-        const val GADGET_AUTO_DIR = "/gadget/auto"
-        const val GADGET_AUTO_PACKAGE = "gadget.auto"
+        const val GADGET_GENERATE_DIR = "/gadget/generate"
+        const val GADGET_GENERATE_PACKAGE = "gadget.generate"
+
+        /** Java compile option **/
+        const val COMPILE_OPTION_PROJECT_NAME = "GCompileOptionProjectName"
     }
 }

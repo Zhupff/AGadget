@@ -1,9 +1,10 @@
 import gadget.DepBuilder
 
 DepBuilder.build {
-    gadgetBaseGradle()
+    gadgetCompileGradle()
     publishGradle()
 
     gadgetBase()
     gadgetCommonLib()
+    gadgetDoRLib()
 }

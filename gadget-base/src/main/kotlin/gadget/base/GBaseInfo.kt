@@ -4,8 +4,7 @@
 package gadget.base
 
 class GBaseInfo private constructor() {
-    companion object {
-        const val GROUP: String = "com.github.zhupff.agadget"
-        const val VERSION: String = "0.1.0-debug"
-    }
-}
+companion object {
+const val GROUP: String ="com.github.zhupff.agadget"
+const val VERSION: String ="0.1.0-debug6"
+}}
