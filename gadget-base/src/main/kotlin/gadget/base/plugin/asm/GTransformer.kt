@@ -1,10 +1,16 @@
 package gadget.base.plugin.asm
 
+import gadget.base.plugin.GPluginContext
+
 /**
  * Author: Zhupf
  * E-mail: zhupfplus@gmail.com
  */
 abstract class GTransformer {
+
+    open fun beforeTransform(context: GPluginContext) {}
+
+    open fun afterTransform(context: GPluginContext) {}
 
     open fun filterClass(className: String): Boolean = true
 

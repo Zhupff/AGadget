@@ -7,8 +7,11 @@ import gadget.base.plugin.asm.GTransformer
  * Author: Zhupf
  * E-mail: zhupfplus@gmail.com
  */
-open class GSimpleLibPlugin(private vararg val transformers: GTransformer)
-    : GLibPlugin<GSimpleLibTransform>() {
+open class GSimpleLibPlugin : GLibPlugin<GSimpleLibTransform>() {
+    companion object {
+        val mSimpleLibTransformersMap: MutableMap<String, MutableList<GTransformer>> = HashMap()
+    }
 
-    override fun newTransformInstance() = GSimpleLibTransform(mContext, transformers.toMutableList())
+    override fun newTransformInstance() = GSimpleLibTransform(
+        mContext, mSimpleLibTransformersMap[mContext.projectName] ?: mutableListOf())
 }

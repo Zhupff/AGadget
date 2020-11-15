@@ -11,7 +11,7 @@ abstract class GAppPlugin<T : GAppTransform> : GPlugin<T>() {
 
     override fun apply(project: Project) {
         super.apply(project)
-        if (mContext.mIsApplicationProject) {
+        if (mContext.mIsApplicationProject && mTransform.getTransformerSize() > 0) {
             project.extensions.findByType(AppExtension::class.java)?.registerTransform(mTransform)
         }
     }

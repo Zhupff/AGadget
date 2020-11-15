@@ -1,6 +1,10 @@
 package gadget
 
+import gadget.base.plugin.asm.GTransformer
+import gadget.base.plugin.simple.GSimpleAppPlugin
+import gadget.base.plugin.simple.GSimpleLibPlugin
 import gadget.common.GConstants
+import gadget.dor.plugin.GDoRTransformer
 import org.gradle.api.Project
 
 /**
@@ -27,6 +31,9 @@ class GadgetBox {
         boolean mIsApplicationModule
         boolean mIsAndroidLibraryModule
 
+        ArrayList<GTransformer> mLibTransformers = new ArrayList<>()
+        ArrayList<GTransformer> mAppTransformers = new ArrayList<>()
+
         _GadgetBox(script, isKt) {
             mProject = script.project
             mIsKt = isKt
@@ -42,6 +49,24 @@ class GadgetBox {
             try {
                 mProject.android.defaultConfig.javaCompileOptions.annotationProcessorOptions {
                     arguments.put(GConstants.COMPILE_OPTION_PROJECT_NAME, mProject.name)
+                }
+            } catch (Exception e) {
+                e.printStackTrace()
+            }
+        }
+
+        /**
+         * Call this method finally.
+         */
+        def done() {
+            try {
+                if (!mLibTransformers.isEmpty()) {
+                    GSimpleLibPlugin.mSimpleLibTransformersMap[mProject.name] = mLibTransformers
+                    apply plugin: GSimpleLibPlugin
+                }
+                if (!mAppTransformers.isEmpty()) {
+                    GSimpleAppPlugin.mSimpleAppTransformers = mAppTransformers
+                    apply plugin: GSimpleAppPlugin
                 }
             } catch (Exception e) {
                 e.printStackTrace()
@@ -66,6 +91,13 @@ class GadgetBox {
             } catch (Exception e) {
                 e.printStackTrace()
             }
+        }
+
+        def gadgetDoRPlugin() {
+            if (!mIsApplicationModule) {
+                throw new IllegalStateException("gadgetDoRPlugin() can only work in Android Application.")
+            }
+            mAppTransformers.add(new GDoRTransformer())
         }
         /** Inject gadget-dor. **/
     }

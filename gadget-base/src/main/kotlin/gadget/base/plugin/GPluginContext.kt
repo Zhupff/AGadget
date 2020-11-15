@@ -9,5 +9,6 @@ import org.gradle.api.Project
  */
 open class GPluginContext(
     project: Project,
+    val projectName: String = project.name,
     val mIsApplicationProject: Boolean = project.plugins.hasPlugin("com.android.application"),
     val mIsAndroidLibraryProject: Boolean = project.plugins.hasPlugin("com.android.library"))

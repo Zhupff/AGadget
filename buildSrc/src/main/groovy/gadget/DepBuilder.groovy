@@ -75,5 +75,11 @@ class DepBuilder {
                 implementation project(DepInfo.GADGET_DOR_LIB)
             }
         }
+
+        def gadgetDoRCompile() {
+            dependencies {
+                implementation project(DepInfo.GADGET_DOR_COMPILE)
+            }
+        }
     }
 }

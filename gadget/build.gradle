@@ -6,4 +6,5 @@ DepBuilder.build {
 
     gadgetBase()
     gadgetCommonLib()
+    gadgetDoRCompile()
 }

@@ -9,7 +9,7 @@ import org.apache.commons.io.FileUtils
  * E-mail: zhupfplus@gmail.com
  */
 abstract class GTransform(
-    protected val mContext: GPluginContext,
+    protected open val mContext: GPluginContext,
     protected open val mTransformers: MutableList<GTransformer> = ArrayList())
     : Transform() {
 
@@ -21,8 +21,18 @@ abstract class GTransform(
         super.transform(transformInvocation)
         transformInvocation?.outputProvider?.let { output ->
             output.deleteAll()
+            beforeTransform()
             handleTransformInvocation(transformInvocation, output)
+            afterTransform()
         }
+    }
+
+    protected open fun beforeTransform() {
+        mTransformers.forEach { it.beforeTransform(mContext) }
+    }
+
+    protected open fun afterTransform() {
+        mTransformers.forEach { it.afterTransform(mContext) }
     }
 
     protected open fun handleTransformInvocation(
@@ -64,4 +74,6 @@ abstract class GTransform(
         mTransformers.forEach { bytes = it.handleJarClass(className, bytes) }
         return bytes
     }
+
+    fun getTransformerSize(): Int = mTransformers.size
 }
