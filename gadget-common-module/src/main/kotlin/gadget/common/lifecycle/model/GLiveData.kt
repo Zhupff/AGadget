@@ -7,20 +7,20 @@ import androidx.lifecycle.LiveData
  * E-mail: zhupfplus@gmail.com
  */
 open class GLiveData<T>(
-    private var mLData: T
+    private var lData: T
 ) : LiveData<T>() {
 
     open fun setLData(data: T) {
-        mLData = data
+        this.lData = data
     }
 
-    open fun getLData(): T = mLData
+    open fun getLData(): T = this.lData
 
     open fun notifyLater() {
-        postValue(mLData)
+        postValue(this.lData)
     }
 
     open fun notifyNow() {
-        setValue(mLData)
+        setValue(this.lData)
     }
 }

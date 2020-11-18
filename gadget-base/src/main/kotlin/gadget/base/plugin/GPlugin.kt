@@ -9,13 +9,13 @@ import org.gradle.api.Project
  */
 abstract class GPlugin<T : GTransform> : Plugin<Project> {
 
-    protected lateinit var mContext: GPluginContext
-    protected lateinit var mTransform: T
+    protected lateinit var context: GPluginContext
+    protected lateinit var transform: T
 
     override fun apply(project: Project) {
-        println("${project.name} apply ${javaClass.simpleName}")
-        mContext = GPluginContext(project)
-        mTransform = newTransformInstance()
+        println("${project.name} apply ${this.javaClass.simpleName}")
+        this.context = GPluginContext(project)
+        this.transform = newTransformInstance()
     }
 
     protected abstract fun newTransformInstance(): T

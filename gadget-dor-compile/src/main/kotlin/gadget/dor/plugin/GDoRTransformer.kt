@@ -18,7 +18,7 @@ class GDoRTransformer : GTransformer() {
         const val GDOR_INTERFACE = "gadget/dor/GDoRInterface"
     }
 
-    private val mDoRList: MutableList<String> = ArrayList()
+    private val dorList: MutableList<String> = ArrayList()
 
     override fun beforeTransform(context: GPluginContext) {
         super.beforeTransform(context)
@@ -32,27 +32,27 @@ class GDoRTransformer : GTransformer() {
 
         if (cn.name == GDOR_CLASS) {
             val cw = ClassWriter(cr, ClassWriter.COMPUTE_MAXS)
-            val cv = GDoRCV(cw, mDoRList)
+            val cv = GDoRCV(cw, this.dorList)
             cr.accept(cv, ClassReader.EXPAND_FRAMES)
             return cw.toByteArray()
         } else if (cn.interfaces.contains(GDOR_INTERFACE)) {
-            mDoRList.add(cn.name)
+            this.dorList.add(cn.name)
         }
 
         return super.transformClass(classBytes)
     }
 
-    private class GDoRCV(cv: ClassVisitor, val mDoRList: List<String>)
+    private class GDoRCV(cv: ClassVisitor, val dorList: List<String>)
         : GClassVisitor(cv) {
 
         override fun visitMethod(access: Int, name: String?, desc: String?, signature: String?, exceptions: Array<String>?): MethodVisitor {
             val mv = super.visitMethod(access, name, desc, signature, exceptions)
-            return if (name == GDOR_METHOD) GDoRMV(mv, mDoRList) else mv
+            return if (name == GDOR_METHOD) GDoRMV(mv, this.dorList) else mv
         }
     }
 
 
-    private class GDoRMV(mv: MethodVisitor, val mDoRList: List<String>) : GMethodVisitor(mv) {
+    private class GDoRMV(mv: MethodVisitor, val dorList: List<String>) : GMethodVisitor(mv) {
 
         override fun visitCode() {
             mv.visitCode()
@@ -61,7 +61,7 @@ class GDoRTransformer : GTransformer() {
             mv.visitMethodInsn(Opcodes.INVOKESPECIAL, "java/util/ArrayList", "<init>", "()V", false)
             mv.visitVarInsn(Opcodes.ASTORE, 1)
 
-            mDoRList.forEach { dor ->
+            this.dorList.forEach { dor ->
                 mv.visitVarInsn(Opcodes.ALOAD, 1)
                 mv.visitTypeInsn(Opcodes.NEW, dor)
                 mv.visitInsn(Opcodes.DUP)

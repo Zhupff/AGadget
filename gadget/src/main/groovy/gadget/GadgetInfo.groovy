@@ -6,11 +6,11 @@ package gadget
 final class GadgetInfo {
 private GadgetInfo() {}
 static final String GROUP = "com.github.zhupff.agadget"
-static final String VERSION = "0.1.0-debug17"
-static final String GADGET = "com.github.zhupff.agadget:gadget:0.1.0-debug17"
-static final String GADGET_BASE = "com.github.zhupff.agadget:gadget-base:0.1.0-debug17"
-static final String GADGET_COMMON_LIB = "com.github.zhupff.agadget:gadget-common-lib:0.1.0-debug17"
-static final String GADGET_COMMON_MODULE = "com.github.zhupff.agadget:gadget-common-module:0.1.0-debug17"
-static final String GADGET_DOR_COMPILE = "com.github.zhupff.agadget:gadget-dor-compile:0.1.0-debug17"
-static final String GADGET_DOR_LIB = "com.github.zhupff.agadget:gadget-dor-lib:0.1.0-debug17"
+static final String VERSION = "0.1.0-debug18"
+static final String GADGET = "com.github.zhupff.agadget:gadget:0.1.0-debug18"
+static final String GADGET_BASE = "com.github.zhupff.agadget:gadget-base:0.1.0-debug18"
+static final String GADGET_COMMON_LIB = "com.github.zhupff.agadget:gadget-common-lib:0.1.0-debug18"
+static final String GADGET_COMMON_MODULE = "com.github.zhupff.agadget:gadget-common-module:0.1.0-debug18"
+static final String GADGET_DOR_COMPILE = "com.github.zhupff.agadget:gadget-dor-compile:0.1.0-debug18"
+static final String GADGET_DOR_LIB = "com.github.zhupff.agadget:gadget-dor-lib:0.1.0-debug18"
 }

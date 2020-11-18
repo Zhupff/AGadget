@@ -26,29 +26,29 @@ class GadgetBox {
 
 
     private static class _GadgetBox {
-        @Delegate Project mProject
-        boolean mIsKt
-        boolean mIsApplicationModule
-        boolean mIsAndroidLibraryModule
+        @Delegate Project project
+        boolean isKt
+        boolean isApplicationModule
+        boolean isAndroidLibraryModule
 
-        ArrayList<GTransformer> mLibTransformers = new ArrayList<>()
-        ArrayList<GTransformer> mAppTransformers = new ArrayList<>()
+        ArrayList<GTransformer> libTransformers = new ArrayList<>()
+        ArrayList<GTransformer> appTransformers = new ArrayList<>()
 
         _GadgetBox(script, isKt) {
-            mProject = script.project
-            mIsKt = isKt
-            mIsApplicationModule = mProject.plugins.hasPlugin("com.android.application")
-            mIsAndroidLibraryModule = mProject.plugins.hasPlugin("com.android.library")
+            this.project = script.project
+            this.isKt = isKt
+            this.isApplicationModule = this.project.plugins.hasPlugin("com.android.application")
+            this.isAndroidLibraryModule = this.project.plugins.hasPlugin("com.android.library")
             openGadgetBox()
         }
 
         private def openGadgetBox() {
-            if (!mIsApplicationModule && !mIsAndroidLibraryModule) {
+            if (!this.isApplicationModule && !this.isAndroidLibraryModule) {
                 throw new IllegalStateException("GadgetBox can only work in Android Application or Library.")
             }
             try {
-                mProject.android.defaultConfig.javaCompileOptions.annotationProcessorOptions {
-                    arguments.put(GConstants.COMPILE_OPTION_PROJECT_NAME, mProject.name)
+                this.project.android.defaultConfig.javaCompileOptions.annotationProcessorOptions {
+                    arguments.put(GConstants.COMPILE_OPTION_PROJECT_NAME, this.project.name)
                 }
             } catch (Exception e) {
                 e.printStackTrace()
@@ -60,12 +60,12 @@ class GadgetBox {
          */
         def done() {
             try {
-                if (!mLibTransformers.isEmpty()) {
-                    GSimpleLibPlugin.mSimpleLibTransformersMap[mProject.name] = mLibTransformers
+                if (!this.libTransformers.isEmpty()) {
+                    GSimpleLibPlugin.simpleLibTransformersMap[this.project.name] = this.libTransformers
                     apply plugin: GSimpleLibPlugin
                 }
-                if (!mAppTransformers.isEmpty()) {
-                    GSimpleAppPlugin.mSimpleAppTransformers = mAppTransformers
+                if (!this.mAppTransformers.isEmpty()) {
+                    GSimpleAppPlugin.simpleAppTransformers = this.appTransformers
                     apply plugin: GSimpleAppPlugin
                 }
             } catch (Exception e) {
@@ -77,13 +77,13 @@ class GadgetBox {
         /** Inject gadget-dor. **/
         def gadgetDoR() {
             try {
-                if (!mIsKt) {
-                    mProject.dependencies {
+                if (!this.isKt) {
+                    this.project.dependencies {
                         implementation GadgetInfo.GADGET_DOR_LIB
                         annotationProcessor GadgetInfo.GADGET_DOR_COMPILE
                     }
                 } else {
-                    mProject.dependencies {
+                    this.project.dependencies {
                         implementation GadgetInfo.GADGET_DOR_LIB
                         kapt GadgetInfo.GADGET_DOR_COMPILE
                     }
@@ -94,10 +94,10 @@ class GadgetBox {
         }
 
         def gadgetDoRPlugin() {
-            if (!mIsApplicationModule) {
+            if (!this.isApplicationModule) {
                 throw new IllegalStateException("gadgetDoRPlugin() can only work in Android Application.")
             }
-            mAppTransformers.add(new GDoRTransformer())
+            this.appTransformers.add(new GDoRTransformer())
         }
         /** Inject gadget-dor. **/
     }

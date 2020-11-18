@@ -9,8 +9,8 @@ import gadget.base.plugin.asm.GTransformer
  */
 open class GSimpleAppPlugin : GAppPlugin<GSimpleAppTransform>() {
     companion object {
-        var mSimpleAppTransformers: MutableList<GTransformer> = ArrayList()
+        var simpleAppTransformers: MutableList<GTransformer> = ArrayList()
     }
 
-    override fun newTransformInstance() = GSimpleAppTransform(mContext, mSimpleAppTransformers)
+    override fun newTransformInstance() = GSimpleAppTransform(this.context, simpleAppTransformers)
 }

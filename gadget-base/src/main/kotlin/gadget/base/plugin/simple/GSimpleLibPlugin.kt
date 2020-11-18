@@ -9,9 +9,9 @@ import gadget.base.plugin.asm.GTransformer
  */
 open class GSimpleLibPlugin : GLibPlugin<GSimpleLibTransform>() {
     companion object {
-        val mSimpleLibTransformersMap: MutableMap<String, MutableList<GTransformer>> = HashMap()
+        val simpleLibTransformersMap: MutableMap<String, MutableList<GTransformer>> = HashMap()
     }
 
     override fun newTransformInstance() = GSimpleLibTransform(
-        mContext, mSimpleLibTransformersMap[mContext.projectName] ?: mutableListOf())
+        this.context, simpleLibTransformersMap[this.context.projectName] ?: mutableListOf())
 }

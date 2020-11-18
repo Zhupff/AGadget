@@ -12,10 +12,10 @@ class DepBuilder {
 
 
     private static class _DepBuilder {
-        @Delegate Project mProject
+        @Delegate Project project
 
         private _DepBuilder(script) {
-            mProject = script.project
+            project = script.project
         }
 
         /** Build gradle **/

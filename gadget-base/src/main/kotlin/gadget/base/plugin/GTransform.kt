@@ -9,11 +9,11 @@ import org.apache.commons.io.FileUtils
  * E-mail: zhupfplus@gmail.com
  */
 abstract class GTransform(
-    protected open val mContext: GPluginContext,
-    protected open val mTransformers: MutableList<GTransformer> = ArrayList())
+    protected open val context: GPluginContext,
+    protected open val transformers: MutableList<GTransformer> = ArrayList())
     : Transform() {
 
-    override fun getName(): String = javaClass.simpleName
+    override fun getName(): String = this.javaClass.simpleName
 
     override fun isIncremental(): Boolean = true
 
@@ -28,11 +28,11 @@ abstract class GTransform(
     }
 
     protected open fun beforeTransform() {
-        mTransformers.forEach { it.beforeTransform(mContext) }
+        this.transformers.forEach { it.beforeTransform(this.context) }
     }
 
     protected open fun afterTransform() {
-        mTransformers.forEach { it.afterTransform(mContext) }
+        this.transformers.forEach { it.afterTransform(this.context) }
     }
 
     protected open fun handleTransformInvocation(
@@ -65,15 +65,15 @@ abstract class GTransform(
 
     protected open fun handleDirClass(className: String, classBytes: ByteArray): ByteArray {
         var bytes = classBytes
-        mTransformers.forEach { bytes = it.handleDirClass(className, bytes) }
+        this.transformers.forEach { bytes = it.handleDirClass(className, bytes) }
         return bytes
     }
 
     protected open fun handleJarClass(className: String, classBytes: ByteArray): ByteArray {
         var bytes = classBytes
-        mTransformers.forEach { bytes = it.handleJarClass(className, bytes) }
+        this.transformers.forEach { bytes = it.handleJarClass(className, bytes) }
         return bytes
     }
 
-    fun getTransformerSize(): Int = mTransformers.size
+    fun getTransformerSize(): Int = this.transformers.size
 }

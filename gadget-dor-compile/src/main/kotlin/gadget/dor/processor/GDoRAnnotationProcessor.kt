@@ -37,7 +37,7 @@ class GDoRAnnotationProcessor : GAnnotationProcessor() {
         if (typeElementSet == null || roundEnvironment == null) {
             return false
         }
-        val projectName = processingEnv.options[GConstants.COMPILE_OPTION_PROJECT_NAME]
+        val projectName = this.processingEnv.options[GConstants.COMPILE_OPTION_PROJECT_NAME]
         if (GString.isNullOrEmpty(projectName)) {
             return false
         }
@@ -211,7 +211,7 @@ class GDoRAnnotationProcessor : GAnnotationProcessor() {
     }
 
     private fun getClassName(element: Element): String {
-        val packageName = processingEnv.elementUtils.getPackageOf(element).qualifiedName.toString()
+        val packageName = this.processingEnv.elementUtils.getPackageOf(element).qualifiedName.toString()
         val elementName = element.simpleName
         return "${packageName}.${elementName}"
     }
@@ -221,7 +221,7 @@ class GDoRAnnotationProcessor : GAnnotationProcessor() {
             .builder(GConstants.GADGET_GENERATE_PACKAGE, getPROJECT_GDoRTypeSpec(projectName, fields))
             .build()
         try {
-            javaFile.writeTo(processingEnv.filer)
+            javaFile.writeTo(this.processingEnv.filer)
         } catch (e: Exception) {
             e.printStackTrace()
         }
