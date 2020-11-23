@@ -98,5 +98,14 @@ class GadgetBox {
             this.transformers.add(new GDoRTransformer())
         }
         /** Inject gadget-dor. **/
+
+
+        /** Inject gadget-flipperview. **/
+        def gadgetScrollView() {
+            dependencies {
+                implementation GadgetInfo.GADGET_SCROLLVIEW
+            }
+        }
+        /** Inject gadget-flipperview. **/
     }
 }

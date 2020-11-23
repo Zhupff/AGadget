@@ -8,3 +8,5 @@ include ':gadget-common-module'
 
 include ':gadget-dor-compile'
 include ':gadget-dor-lib'
+
+include ':gadget-scrollview'
