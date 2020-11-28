@@ -1,4 +1,5 @@
 rootProject.name = "agadget-project"
+include ':sample'
 
 include ':gadget'
 include ':gadget-base'
