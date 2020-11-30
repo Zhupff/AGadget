@@ -13,9 +13,9 @@ abstract class GPlugin<T : GTransform> : Plugin<Project> {
     protected lateinit var transform: T
 
     override fun apply(project: Project) {
-        println("${project.name} apply ${this.javaClass.simpleName}")
-        this.context = GPluginContext(project)
-        this.transform = newTransformInstance()
+        println("${project.name} apply ${javaClass.simpleName}")
+        context = GPluginContext(project)
+        transform = newTransformInstance()
     }
 
     protected abstract fun newTransformInstance(): T

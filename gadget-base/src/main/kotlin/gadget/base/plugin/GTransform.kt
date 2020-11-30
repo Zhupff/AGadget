@@ -13,7 +13,7 @@ abstract class GTransform(
     protected open val transformers: MutableList<GTransformer> = ArrayList())
     : Transform() {
 
-    override fun getName(): String = this.javaClass.simpleName
+    override fun getName(): String = javaClass.simpleName
 
     override fun isIncremental(): Boolean = true
 
@@ -28,11 +28,11 @@ abstract class GTransform(
     }
 
     protected open fun beforeTransform() {
-        this.transformers.forEach { it.beforeTransform(this.context) }
+        transformers.forEach { it.beforeTransform(context) }
     }
 
     protected open fun afterTransform() {
-        this.transformers.forEach { it.afterTransform(this.context) }
+        transformers.forEach { it.afterTransform(context) }
     }
 
     protected open fun handleTransformInvocation(
@@ -65,15 +65,15 @@ abstract class GTransform(
 
     protected open fun handleDirClass(className: String, classBytes: ByteArray): ByteArray {
         var bytes = classBytes
-        this.transformers.forEach { bytes = it.handleDirClass(className, bytes) }
+        transformers.forEach { bytes = it.handleDirClass(className, bytes) }
         return bytes
     }
 
     protected open fun handleJarClass(className: String, classBytes: ByteArray): ByteArray {
         var bytes = classBytes
-        this.transformers.forEach { bytes = it.handleJarClass(className, bytes) }
+        transformers.forEach { bytes = it.handleJarClass(className, bytes) }
         return bytes
     }
 
-    fun getTransformerSize(): Int = this.transformers.size
+    fun getTransformerSize(): Int = transformers.size
 }

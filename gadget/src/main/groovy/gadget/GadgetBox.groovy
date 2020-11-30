@@ -36,11 +36,11 @@ class GadgetBox {
         }
 
         private def _init() {
-            if (!this.context.isApplicationProject && !this.context.isAndroidLibraryProject) {
+            if (!context.isApplicationProject && !context.isAndroidLibraryProject) {
                 throw new IllegalStateException("GadgetBox can only work in Android Application or Library.")
             }
-            this.project.android.defaultConfig.javaCompileOptions.annotationProcessorOptions {
-                arguments.put(GConstants.COMPILE_OPTION_PROJECT_NAME, this.project.name)
+            project.android.defaultConfig.javaCompileOptions.annotationProcessorOptions {
+                arguments.put(GConstants.COMPILE_OPTION_PROJECT_NAME, project.name)
             }
         }
 
@@ -49,12 +49,12 @@ class GadgetBox {
          * Call this method finally.
          */
         def close() {
-            if (!this.transformers.isEmpty()) {
-                if (this.context.isApplicationProject) {
-                    GSimpleAppPlugin.simpleAppTransformers = this.transformers
+            if (!transformers.isEmpty()) {
+                if (context.isApplicationProject) {
+                    GSimpleAppPlugin.simpleAppTransformers = transformers
                     apply plugin: GSimpleAppPlugin
-                } else if (this.context.isAndroidLibraryProject) {
-                    GSimpleLibPlugin.simpleLibTransformersMap[this.project.name] = this.transformers
+                } else if (context.isAndroidLibraryProject) {
+                    GSimpleLibPlugin.simpleLibTransformersMap[project.name] = transformers
                     apply plugin: GSimpleLibPlugin
                 }
             }
@@ -78,7 +78,7 @@ class GadgetBox {
 
         /** Inject gadget-dor. **/
         def gadgetDoR() {
-            if (!this.context.isKotlin) {
+            if (!context.isKotlin) {
                 dependencies {
                     implementation GadgetInfo.GADGET_DOR_LIB
                     annotationProcessor GadgetInfo.GADGET_DOR_COMPILE
@@ -92,10 +92,10 @@ class GadgetBox {
         }
 
         def gadgetDoRPlugin() {
-            if (!this.context.isApplicationProject) {
+            if (!context.isApplicationProject) {
                 throw new IllegalStateException("gadgetDoRPlugin() can only work in Android Application.")
             }
-            this.transformers.add(new GDoRTransformer())
+            transformers.add(new GDoRTransformer())
         }
         /** Inject gadget-dor. **/
 

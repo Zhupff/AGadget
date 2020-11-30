@@ -14,13 +14,13 @@ open class GLiveData<T>(
         this.lData = data
     }
 
-    open fun getLData(): T = this.lData
+    open fun getLData(): T = lData
 
     open fun notifyLater() {
-        postValue(this.lData)
+        postValue(lData)
     }
 
     open fun notifyNow() {
-        setValue(this.lData)
+        setValue(lData)
     }
 }

@@ -1,3 +1,4 @@
+include ':gadget-log'
 rootProject.name = "agadget-project"
 include ':sample'
 

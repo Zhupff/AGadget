@@ -32,11 +32,11 @@ class GDoRTransformer : GTransformer() {
 
         if (cn.name == GDOR_CLASS) {
             val cw = ClassWriter(cr, ClassWriter.COMPUTE_MAXS)
-            val cv = GDoRCV(cw, this.dorList)
+            val cv = GDoRCV(cw, dorList)
             cr.accept(cv, ClassReader.EXPAND_FRAMES)
             return cw.toByteArray()
         } else if (cn.interfaces.contains(GDOR_INTERFACE)) {
-            this.dorList.add(cn.name)
+            dorList.add(cn.name)
         }
 
         return super.transformClass(classBytes)
@@ -47,7 +47,7 @@ class GDoRTransformer : GTransformer() {
 
         override fun visitMethod(access: Int, name: String?, desc: String?, signature: String?, exceptions: Array<String>?): MethodVisitor {
             val mv = super.visitMethod(access, name, desc, signature, exceptions)
-            return if (name == GDOR_METHOD) GDoRMV(mv, this.dorList) else mv
+            return if (name == GDOR_METHOD) GDoRMV(mv, dorList) else mv
         }
     }
 
@@ -61,7 +61,7 @@ class GDoRTransformer : GTransformer() {
             mv.visitMethodInsn(Opcodes.INVOKESPECIAL, "java/util/ArrayList", "<init>", "()V", false)
             mv.visitVarInsn(Opcodes.ASTORE, 1)
 
-            this.dorList.forEach { dor ->
+            dorList.forEach { dor ->
                 mv.visitVarInsn(Opcodes.ALOAD, 1)
                 mv.visitTypeInsn(Opcodes.NEW, dor)
                 mv.visitInsn(Opcodes.DUP)

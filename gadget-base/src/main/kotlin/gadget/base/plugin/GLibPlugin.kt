@@ -12,14 +12,14 @@ abstract class GLibPlugin<T : GLibTransform> : GPlugin<T>() {
 
     override fun apply(project: Project) {
         super.apply(project)
-        if (this.context.isApplicationProject && this.transform.getTransformerSize() > 0) {
+        if (context.isApplicationProject && transform.getTransformerSize() > 0) {
             project.extensions
                 .findByType(AppExtension::class.java)
-                ?.registerTransform(this.transform)
-        } else if (this.context.isAndroidLibraryProject && this.transform.getTransformerSize() > 0) {
+                ?.registerTransform(transform)
+        } else if (context.isAndroidLibraryProject && transform.getTransformerSize() > 0) {
             project.extensions
                 .findByType(LibraryExtension::class.java)
-                ?.registerTransform(this.transform)
+                ?.registerTransform(transform)
         }
     }
 }
