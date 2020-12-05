@@ -1,4 +1,3 @@
-include ':gadget-log'
 rootProject.name = "agadget-project"
 include ':sample'
 
@@ -10,5 +9,9 @@ include ':gadget-common-module'
 
 include ':gadget-dor-compile'
 include ':gadget-dor-lib'
+
+include ':gadget-log-compile'
+include ':gadget-log-lib'
+include ':gadget-log'
 
 include ':gadget-scrollview'

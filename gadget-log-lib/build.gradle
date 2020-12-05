@@ -1,11 +1,8 @@
 import gadget.DepBuilder
 
 DepBuilder.build {
-    gadgetBaseGradle()
+    gadgetJavaLibGradle()
     publishGradle()
 
-    gadgetBase()
     gadgetCommonLib()
-    gadgetDoRCompile()
-    gadgetLogCompile()
 }

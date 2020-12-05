@@ -5,6 +5,7 @@ import gadget.base.plugin.simple.GSimpleAppPlugin
 import gadget.base.plugin.simple.GSimpleLibPlugin
 import gadget.common.GConstants
 import gadget.dor.plugin.GDoRTransformer
+import gadget.log.plugin.GLogTransformer
 import org.gradle.api.Project
 
 /**
@@ -91,7 +92,7 @@ class GadgetBox {
             }
         }
 
-        def gadgetDoRPlugin() {
+        def gadgetDoRCompile() {
             if (!context.isApplicationProject) {
                 throw new IllegalStateException("gadgetDoRPlugin() can only work in Android Application.")
             }
@@ -107,5 +108,21 @@ class GadgetBox {
             }
         }
         /** Inject gadget-flipperview. **/
+
+
+        /** Inject gadget-log **/
+        def gadgetLog() {
+            dependencies {
+                implementation GadgetInfo.GADGET_LOG
+            }
+        }
+
+        def gadgetLogCompile() {
+            dependencies {
+                implementation GadgetInfo.GADGET_LOG_LIB
+            }
+            transformers.add(new GLogTransformer())
+        }
+        /** Inject gadget-log **/
     }
 }

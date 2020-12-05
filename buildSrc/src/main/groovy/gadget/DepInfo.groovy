@@ -12,6 +12,8 @@ static final String GADGET_COMMON_MODULE = ":gadget-common-module"
 static final String GADGET_DOR_COMPILE = ":gadget-dor-compile"
 static final String GADGET_DOR_LIB = ":gadget-dor-lib"
 static final String GADGET_LOG = ":gadget-log"
+static final String GADGET_LOG_COMPILE = ":gadget-log-compile"
+static final String GADGET_LOG_LIB = ":gadget-log-lib"
 static final String GADGET_SCROLLVIEW = ":gadget-scrollview"
 static final String SAMPLE = ":sample"
 }

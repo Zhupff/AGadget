@@ -81,5 +81,17 @@ class DepBuilder {
                 implementation project(DepInfo.GADGET_DOR_COMPILE)
             }
         }
+
+        def gadgetLogLib() {
+            dependencies {
+                implementation project(DepInfo.GADGET_LOG_LIB)
+            }
+        }
+
+        def gadgetLogCompile() {
+            dependencies {
+                implementation project(DepInfo.GADGET_LOG_COMPILE)
+            }
+        }
     }
 }
