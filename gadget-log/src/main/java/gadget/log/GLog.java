@@ -8,13 +8,13 @@ import gadget.common.util.GString;
  * Description:
  */
 public final class GLog {
-    private GLog() {
-    }
+    private GLog() {}
 
     /** log(String tag, String str, Object... objects) **/
 
     public static void v(String tag, String str, Object... objects) {
         l(GLogLevel.VERBOSE, tag, str, objects);
+        GLogger.INSTANCE.l(tag, str, objects);
     }
 
     public static void d(String tag, String str, Object... objects) {
@@ -34,7 +34,7 @@ public final class GLog {
     }
 
     private static void l(GLogLevel level, String tag, String str, Object... objects) {
-        log(GLogTask.Companion.newTask()
+        log(GLogTask.Companion.acquireTask()
             .withLevel(level)
             .withTag(tag)
             .withContent(GString.INSTANCE.format(str, objects)));
@@ -63,7 +63,7 @@ public final class GLog {
     }
 
     private static void l(GLogLevel level, String tag, Object object) {
-        log(GLogTask.Companion.newTask()
+        log(GLogTask.Companion.acquireTask()
             .withLevel(level)
             .withTag(tag)
             .withContent(object));
@@ -92,7 +92,7 @@ public final class GLog {
     }
 
     private static void ll(GLogLevel level, String tag, Object... objects) {
-        log(GLogTask.Companion.newTask()
+        log(GLogTask.Companion.acquireTask()
             .withLevel(level)
             .withTag(tag)
             .withContent(objects));
@@ -121,7 +121,7 @@ public final class GLog {
     }
 
     private static GLogTask L(GLogLevel level, String str, Object... objects) {
-        return GLogTask.Companion.newTask()
+        return GLogTask.Companion.acquireTask()
             .withLevel(level)
             .withContent(GString.INSTANCE.format(str, objects));
     }
@@ -149,7 +149,7 @@ public final class GLog {
     }
 
     private static GLogTask L(GLogLevel level, Object object) {
-        return GLogTask.Companion.newTask()
+        return GLogTask.Companion.acquireTask()
             .withLevel(level)
             .withContent(object);
     }
@@ -177,7 +177,7 @@ public final class GLog {
     }
 
     private static GLogTask LL(GLogLevel level, Object... objects) {
-        return GLogTask.Companion.newTask()
+        return GLogTask.Companion.acquireTask()
             .withLevel(level)
             .withContent(objects);
     }

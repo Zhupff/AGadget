@@ -7,5 +7,5 @@ package gadget.log
  */
 internal object GLogger {
 
-    fun log(task: GLogTask, tag: String) {}
+    fun l(tag: String?, str: String?, vararg obj: Any?) {}
 }
