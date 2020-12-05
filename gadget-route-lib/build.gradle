@@ -1,0 +1,8 @@
+import gadget.DepBuilder
+
+DepBuilder.build {
+    gadgetJavaLibGradle()
+    publishGradle()
+
+    gadgetCommonLib()
+}

@@ -6,6 +6,7 @@ import gadget.base.plugin.simple.GSimpleLibPlugin
 import gadget.common.GConstants
 import gadget.dor.plugin.GDoRTransformer
 import gadget.log.plugin.GLogTransformer
+import gadget.route.GRouteTransformer
 import org.gradle.api.Project
 
 /**
@@ -124,5 +125,19 @@ class GadgetBox {
             transformers.add(new GLogTransformer())
         }
         /** Inject gadget-log **/
+
+
+        /** Inject gadget-route **/
+        def gadgetRoute() {
+            dependencies {
+                implementation GadgetInfo.GADGET_ROUTE_LIB
+                implementation GadgetInfo.GADGET_ROUTE
+            }
+        }
+
+        def gadgetRouteCompile() {
+            transformers.add(new GRouteTransformer())
+        }
+        /** Inject gadget-route **/
     }
 }

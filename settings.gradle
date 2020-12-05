@@ -14,4 +14,8 @@ include ':gadget-log-compile'
 include ':gadget-log-lib'
 include ':gadget-log'
 
+include ':gadget-route-compile'
+include ':gadget-route-lib'
+include ':gadget-route'
+
 include ':gadget-scrollview'

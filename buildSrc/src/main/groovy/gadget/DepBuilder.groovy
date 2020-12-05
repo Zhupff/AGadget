@@ -93,5 +93,17 @@ class DepBuilder {
                 implementation project(DepInfo.GADGET_LOG_COMPILE)
             }
         }
+
+        def gadgetRouteLib() {
+            dependencies {
+                implementation project(DepInfo.GADGET_ROUTE_LIB)
+            }
+        }
+
+        def gadgetRouteCompile() {
+            dependencies {
+                implementation project(DepInfo.GADGET_ROUTE_COMPILE)
+            }
+        }
     }
 }
