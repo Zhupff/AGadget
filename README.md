@@ -1,6 +1,28 @@
 # agadget
 [![](https://jitpack.io/v/zhupff/agadget.svg)](https://jitpack.io/#zhupff/agadget)
 
+
+## Feature
+
+- [gadget-common]()
+> usable
+
+- [gadget-dor]()
+> usable
+
+- [gadget-log]()
+> usable without compilation part
+
+- [gadget-route]()
+> unusable
+
+- [gadget-roundview]()
+> unusable
+
+- [gadget-scrollview]()
+> unusable
+
+
 ## License
 ```
 Copyright 2020 Zhupf

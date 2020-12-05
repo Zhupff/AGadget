@@ -16,6 +16,7 @@ static final String GADGET_DOR_LIB = "com.github.zhupff.agadget:gadget-dor-lib:0
 static final String GADGET_LOG = "com.github.zhupff.agadget:gadget-log:0.1.0-debug20"
 static final String GADGET_LOG_COMPILE = "com.github.zhupff.agadget:gadget-log-compile:0.1.0-debug20"
 static final String GADGET_LOG_LIB = "com.github.zhupff.agadget:gadget-log-lib:0.1.0-debug20"
+static final String GADGET_ROUNDVIEW = "com.github.zhupff.agadget:gadget-roundview:0.1.0-debug20"
 static final String GADGET_ROUTE = "com.github.zhupff.agadget:gadget-route:0.1.0-debug20"
 static final String GADGET_ROUTE_COMPILE = "com.github.zhupff.agadget:gadget-route-compile:0.1.0-debug20"
 static final String GADGET_ROUTE_LIB = "com.github.zhupff.agadget:gadget-route-lib:0.1.0-debug20"

@@ -18,4 +18,6 @@ include ':gadget-route-compile'
 include ':gadget-route-lib'
 include ':gadget-route'
 
+include ':gadget-roundview'
+
 include ':gadget-scrollview'

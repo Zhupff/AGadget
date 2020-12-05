@@ -102,15 +102,6 @@ class GadgetBox {
         /** Inject gadget-dor. **/
 
 
-        /** Inject gadget-flipperview. **/
-        def gadgetScrollView() {
-            dependencies {
-                implementation GadgetInfo.GADGET_SCROLLVIEW
-            }
-        }
-        /** Inject gadget-flipperview. **/
-
-
         /** Inject gadget-log **/
         def gadgetLog() {
             dependencies {
@@ -139,5 +130,23 @@ class GadgetBox {
             transformers.add(new GRouteTransformer())
         }
         /** Inject gadget-route **/
+
+
+        /** Inject gadget-scrollview. **/
+        def gadgetScrollView() {
+            dependencies {
+                implementation GadgetInfo.GADGET_SCROLLVIEW
+            }
+        }
+        /** Inject gadget-scrollview. **/
+
+
+        /** Inject gadget-roundviewview. **/
+        def gadgetRoundView() {
+            dependencies {
+                implementation GadgetInfo.GADGET_ROUNDVIEW
+            }
+        }
+        /** Inject gadget-roundview. **/
     }
 }

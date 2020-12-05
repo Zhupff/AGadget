@@ -1,0 +1,8 @@
+import gadget.DepBuilder
+
+DepBuilder.build {
+    gadgetAndroidLibGradle()
+    publishGradle()
+
+    gadgetCommonLib()
+}
