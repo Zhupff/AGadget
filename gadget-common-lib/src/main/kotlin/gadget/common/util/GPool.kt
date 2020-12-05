@@ -87,7 +87,7 @@ open class GNonSyncPool<T>(capacity: Int = 16) : GPool<T>(capacity) {
  * A synchronized pool of objects.
  */
 class GSyncPool<T>(capacity: Int = 16) : GNonSyncPool<T>(capacity) {
-    private val lock = GLock()
+    private val lock = GLock("GSyncPool")
 
     override fun acquire(): T? {
         synchronized(lock) {

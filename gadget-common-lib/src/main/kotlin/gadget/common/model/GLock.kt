@@ -5,4 +5,4 @@ package gadget.common.model
  * E-mail: zhupfplus@gmail.com
  * Description:
  */
-class GLock
+class GLock(val name: String)

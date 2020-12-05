@@ -6,7 +6,7 @@ package gadget.common.util
  */
 object GString {
 
-    fun format(s: String, vararg a: Any?) = String.format(s, a)
+    fun format(s: String, vararg a: Any?) = String.format(s, *a)
 
     fun isNullOrEmpty(s: String?) = s == null || s.trim().isEmpty()
 

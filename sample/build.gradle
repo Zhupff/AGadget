@@ -18,6 +18,9 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -27,4 +30,5 @@ dependencies {
 
     implementation project(":gadget-common-lib")
     implementation project(":gadget-common-module")
+    implementation project(":gadget-log")
 }
