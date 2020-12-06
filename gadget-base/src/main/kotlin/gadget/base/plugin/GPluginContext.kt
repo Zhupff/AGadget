@@ -11,4 +11,5 @@ open class GPluginContext(
     project: Project,
     val projectName: String = project.name,
     val isApplicationProject: Boolean = project.plugins.hasPlugin("com.android.application"),
-    val isAndroidLibraryProject: Boolean = project.plugins.hasPlugin("com.android.library"))
+    val isAndroidLibraryProject: Boolean = project.plugins.hasPlugin("com.android.library"),
+    val isDebug: Boolean = false)

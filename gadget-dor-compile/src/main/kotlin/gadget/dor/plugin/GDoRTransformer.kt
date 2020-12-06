@@ -1,6 +1,5 @@
 package gadget.dor.plugin
 
-import gadget.base.plugin.GPluginContext
 import gadget.base.plugin.asm.GClassVisitor
 import gadget.base.plugin.asm.GMethodVisitor
 import gadget.base.plugin.asm.GTransformer
@@ -13,17 +12,12 @@ import jdk.internal.org.objectweb.asm.tree.ClassNode
  */
 class GDoRTransformer : GTransformer() {
     companion object {
-        const val GDOR_CLASS = "gadget/dor/GDoR"
-        const val GDOR_METHOD = "getDoRList"
-        const val GDOR_INTERFACE = "gadget/dor/GDoRInterface"
+        private const val GDOR_CLASS = "gadget/dor/GDoR"
+        private const val GDOR_METHOD = "getDoRList"
+        private const val GDOR_INTERFACE = "gadget/dor/GDoRInterface"
     }
 
     private val dorList: MutableList<String> = ArrayList()
-
-    override fun beforeTransform(context: GPluginContext) {
-        super.beforeTransform(context)
-        println("GDoRTransformer beforeTransform")
-    }
 
     override fun transformClass(classBytes: ByteArray): ByteArray {
         val cr = ClassReader(classBytes)
