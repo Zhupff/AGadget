@@ -1,4 +1,4 @@
-package gadget.common.model
+package gadget.common.g
 
 /**
  * Author: Zhupf

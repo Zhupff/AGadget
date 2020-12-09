@@ -1,4 +1,4 @@
-package gadget.route
+package gadget.route.plugin
 
 import gadget.base.plugin.asm.GTransformer
 

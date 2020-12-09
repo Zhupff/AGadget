@@ -228,9 +228,9 @@ class GDoRAnnotationProcessor : GAnnotationProcessor() {
     }
 
     private fun getPROJECT_GDoRTypeSpec(projectName: String, fields: HashMap<String, ArrayList<GDoRField<*>>>): TypeSpec {
-        val className = "${projectName.replace("-", "").toUpperCase()}_GDoR"
+        val className = "${projectName.replace("-", "").toUpperCase()}_TaGDoR"
         return TypeSpec.classBuilder(className)
-            .addSuperinterface(GDoRInterface::class.java)
+            .addSuperinterface(TaGDoR::class.java)
             .addModifiers(Modifier.PUBLIC)
             .addMethod(getInitMethodSpec(fields))
             .build()

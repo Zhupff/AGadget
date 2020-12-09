@@ -5,4 +5,5 @@ DepBuilder.build {
     publishGradle()
 
     gadgetCommonLib()
+    gadgetRouteLib()
 }

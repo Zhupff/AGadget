@@ -13,8 +13,8 @@ import jdk.internal.org.objectweb.asm.tree.ClassNode
 class GDoRTransformer : GTransformer() {
     companion object {
         private const val GDOR_CLASS = "gadget/dor/GDoR"
-        private const val GDOR_METHOD = "getDoRList"
-        private const val GDOR_INTERFACE = "gadget/dor/GDoRInterface"
+        private const val GDOR_METHOD = "getTaGDoRList"
+        private const val GDOR_INTERFACE = "gadget/dor/TaGDoR"
     }
 
     private val dorList: MutableList<String> = ArrayList()

@@ -8,4 +8,13 @@ package gadget.route
 
 @Retention(AnnotationRetention.BINARY)
 @Target(AnnotationTarget.CLASS)
-annotation class GRoutePath(val route: String)
+annotation class GRouteUrl(val protocol: String = DEF_PROTOCOL, val route: String) {
+    companion object {
+        const val DEF_PROTOCOL: String = "groute"
+    }
+}
+
+
+@Retention(AnnotationRetention.BINARY)
+@Target(AnnotationTarget.CLASS)
+annotation class GRouteParser(val protocol: String = GRouteUrl.DEF_PROTOCOL)

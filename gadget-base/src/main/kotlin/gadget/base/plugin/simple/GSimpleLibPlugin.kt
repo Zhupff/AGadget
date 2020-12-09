@@ -13,5 +13,5 @@ open class GSimpleLibPlugin : GLibPlugin<GSimpleLibTransform>() {
     }
 
     override fun newTransformInstance() = GSimpleLibTransform(
-        this.context, simpleLibTransformersMap[this.context.projectName] ?: mutableListOf())
+        this.context, simpleLibTransformersMap[this.context.projectName()] ?: mutableListOf())
 }

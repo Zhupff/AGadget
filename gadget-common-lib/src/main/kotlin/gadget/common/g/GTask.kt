@@ -1,4 +1,4 @@
-package gadget.common.model
+package gadget.common.g
 
 /**
  * Author: Zhupf
@@ -11,4 +11,8 @@ interface GTask : Runnable {
      * Be ready to run this task.
      */
     fun ready()
+
+    override fun run() {
+        ready()
+    }
 }

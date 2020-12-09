@@ -14,7 +14,7 @@ abstract class GPlugin<T : GTransform> : Plugin<Project> {
 
     override fun apply(project: Project) {
         println("${project.name} apply ${javaClass.simpleName}")
-        context = GPluginContext(project)
+        context = GPluginContext().initWithProject(project)
         transform = newTransformInstance()
     }
 

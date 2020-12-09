@@ -1,7 +1,7 @@
 package gadget.log
 
 import android.util.Log
-import gadget.common.model.GTask
+import gadget.common.g.GTask
 import gadget.common.util.GSyncPool
 
 /**
@@ -49,7 +49,7 @@ internal class GLogTask private constructor() : GTask, Runnable {
     }
 
     override fun run() {
-        ready()
+        super.run()
         Log.println(level.level, tag, message)
         releaseTask(this)
     }

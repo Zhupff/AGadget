@@ -1,6 +1,6 @@
 package gadget.common.util
 
-import gadget.common.model.GLock
+import gadget.common.g.GLock
 
 /**
  * Author: Zhupf

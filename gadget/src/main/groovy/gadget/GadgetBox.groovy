@@ -6,7 +6,7 @@ import gadget.base.plugin.simple.GSimpleLibPlugin
 import gadget.common.GConstants
 import gadget.dor.plugin.GDoRTransformer
 import gadget.log.plugin.GLogTransformer
-import gadget.route.GRouteTransformer
+import gadget.route.plugin.GRouteTransformer
 import org.gradle.api.Project
 
 /**

@@ -21,6 +21,7 @@ abstract class GTransform(
         super.transform(transformInvocation)
         transformInvocation?.outputProvider?.let { output ->
             output.deleteAll()
+            context.initWithTransformInvocation(transformInvocation)
             beforeTransform()
             handleTransformInvocation(transformInvocation, output)
             afterTransform()

@@ -1,6 +1,6 @@
 package gadget.log
 
-import gadget.common.model.GLock
+import gadget.common.g.GLock
 
 /**
  * Author: Zhupf

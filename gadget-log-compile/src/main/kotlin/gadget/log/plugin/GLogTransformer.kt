@@ -39,7 +39,7 @@ class GLogTransformer : GTransformer() {
 
     override fun beforeTransform(context: GPluginContext) {
         super.beforeTransform(context)
-        isDebug = context.isDebug
+        isDebug = context.debug()
     }
 
     override fun filterJarClass(className: String): Boolean {
