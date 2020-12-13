@@ -14,25 +14,33 @@ import jdk.internal.org.objectweb.asm.tree.*
  */
 class GLogTransformer : GTransformer() {
     companion object {
-        private const val GLOG_PACKAGE = "gadget/log/"
-        private const val GLOG_CLASS_NAME = "${GLOG_PACKAGE}GLog"
-        private const val GDLOG_CLASS_NAME = "${GLOG_PACKAGE}GDLog"
+        private const val GLOG_CLASS_NAME = "gadget/log/GLog"
+        private const val GDLOG_CLASS_NAME = "gadget/log/GDLog"
         private const val TRANSFORM_METHOD_NAME = "log"
         private const val TRANSFORM_METHOD_DESC = "(Lgadget/log/GLogTask;Ljava/lang/String;)Lgadget/log/GLogTask;"
-        private const val LOG_V_METHOD_NAME = "V"
-        private const val LOG_D_METHOD_NAME = "D"
-        private const val LOG_I_METHOD_NAME = "I"
-        private const val LOG_W_METHOD_NAME = "W"
-        private const val LOG_E_METHOD_NAME = "E"
-        private const val LOG_VV_METHOD_NAME = "VV"
-        private const val LOG_DD_METHOD_NAME = "DD"
-        private const val LOG_II_METHOD_NAME = "II"
-        private const val LOG_WW_METHOD_NAME = "WW"
-        private const val LOG_EE_METHOD_NAME = "EE"
-        private val LOG_METHODS = arrayOf(
-            LOG_V_METHOD_NAME, LOG_D_METHOD_NAME, LOG_I_METHOD_NAME, LOG_W_METHOD_NAME, LOG_E_METHOD_NAME,
-            LOG_VV_METHOD_NAME, LOG_DD_METHOD_NAME, LOG_II_METHOD_NAME, LOG_WW_METHOD_NAME, LOG_EE_METHOD_NAME
+
+        internal const val GLOG_V_METHOD_NAME = "V"
+        internal const val GLOG_D_METHOD_NAME = "D"
+        internal const val GLOG_I_METHOD_NAME = "I"
+        internal const val GLOG_W_METHOD_NAME = "W"
+        internal const val GLOG_E_METHOD_NAME = "E"
+        private const val GLOG_VV_METHOD_NAME = "VV"
+        private const val GLOG_DD_METHOD_NAME = "DD"
+        private const val GLOG_II_METHOD_NAME = "II"
+        private const val GLOG_WW_METHOD_NAME = "WW"
+        private const val GLOG_EE_METHOD_NAME = "EE"
+        internal val GLOG_METHODS = arrayOf(
+            GLOG_V_METHOD_NAME, GLOG_D_METHOD_NAME, GLOG_I_METHOD_NAME, GLOG_W_METHOD_NAME, GLOG_E_METHOD_NAME,
+            GLOG_VV_METHOD_NAME, GLOG_DD_METHOD_NAME, GLOG_II_METHOD_NAME, GLOG_WW_METHOD_NAME, GLOG_EE_METHOD_NAME
         )
+
+        internal const val GLOG_V_ANNOTATION_DESC = "Lgadget/log/GLogI;"
+        internal const val GLOG_D_ANNOTATION_DESC = "Lgadget/log/GLogD;"
+        internal const val GLOG_I_ANNOTATION_DESC = "Lgadget/log/GLogI;"
+        internal const val GLOG_W_ANNOTATION_DESC = "Lgadget/log/GLogW;"
+        internal const val GLOG_E_ANNOTATION_DESC = "Lgadget/log/GLogE;"
+        internal val GLOG_ANNOTATIONS = arrayOf(GLOG_V_ANNOTATION_DESC, GLOG_D_ANNOTATION_DESC,
+            GLOG_I_ANNOTATION_DESC, GLOG_W_ANNOTATION_DESC, GLOG_E_ANNOTATION_DESC)
     }
 
     private var isDebug: Boolean = false
@@ -72,16 +80,18 @@ class GLogTransformer : GTransformer() {
         var hasTransformed = false
         val cnSimpleName = GString.subStringAfterLast(cn.name, "/", 1, cn.name)
         cn.methods.forEach { mn ->
+            val logInfo = GLogInfo.acquire().init(cn, mn)
+
+            hasTransformed = hasTransformed || transformMethodWhenEnter(logInfo, mn)
+
             val instructions = mn.instructions
             var line = 0
             instructions.iterator().forEach { ain ->
                 if (ain is LineNumberNode) {
                     line = ain.line
                 } else if (ain is MethodInsnNode) {
-                    if ((ain.owner == GLOG_CLASS_NAME && LOG_METHODS.contains(ain.name)) ||
-                        (isDebug && ain.owner == GDLOG_CLASS_NAME && LOG_METHODS.contains(ain.name))) {
-                        if ((mn.access and Opcodes.ACC_STATIC != 0) || // static method
-                            cnSimpleName.contains("$")) { // inner class
+                    if ((ain.owner == GLOG_CLASS_NAME || ain.owner == GDLOG_CLASS_NAME) && GLOG_METHODS.contains(ain.name)) {
+                        if (logInfo.isInnerClass || logInfo.isStaticMethod) {
                             val insnList = InsnList()
                             insnList.add(LdcInsnNode("${cnSimpleName}-${mn.name}(${line})"))
                             insnList.add(MethodInsnNode(Opcodes.INVOKESTATIC, ain.owner, TRANSFORM_METHOD_NAME, TRANSFORM_METHOD_DESC, false))
@@ -105,6 +115,9 @@ class GLogTransformer : GTransformer() {
                     }
                 }
             }
+
+            hasTransformed = hasTransformed || transformMethodWhenLeave(logInfo, mn)
+            GLogInfo.release(logInfo)
         }
 
         if (hasTransformed) {
@@ -114,5 +127,19 @@ class GLogTransformer : GTransformer() {
         }
 
         return super.transformDirClass(classBytes)
+    }
+
+    private fun transformMethodWhenEnter(logInfo: GLogInfo, mn: MethodNode): Boolean {
+        if (GString.isNullOrEmpty(logInfo.logMethod)) {
+            return false
+        }
+        return true
+    }
+
+    private fun transformMethodWhenLeave(logInfo: GLogInfo, mn: MethodNode): Boolean {
+        if (GString.isNullOrEmpty(logInfo.logMethod)) {
+            return false
+        }
+        return true
     }
 }
