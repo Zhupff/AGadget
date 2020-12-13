@@ -2,6 +2,7 @@ package gadget.base.plugin.asm
 
 import gadget.common.GConstants
 import jdk.internal.org.objectweb.asm.ClassVisitor
+import jdk.internal.org.objectweb.asm.MethodVisitor
 import jdk.internal.org.objectweb.asm.Opcodes
 
 /**
@@ -25,5 +26,9 @@ abstract class GClassVisitor(cv: ClassVisitor) : ClassVisitor(Opcodes.ASM5, cv) 
         this.classSignature = signature
         this.classSuperName = superName
         this.classInterfaces = interfaces
+    }
+
+    override fun visitMethod(access: Int, name: String?, desc: String?, signature: String?, exceptions: Array<String>?): MethodVisitor {
+        return super.visitMethod(access, name, desc, signature, exceptions)
     }
 }

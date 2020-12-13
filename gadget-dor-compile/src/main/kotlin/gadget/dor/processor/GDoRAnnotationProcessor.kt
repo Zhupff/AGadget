@@ -228,7 +228,7 @@ class GDoRAnnotationProcessor : GAnnotationProcessor() {
     }
 
     private fun getPROJECT_GDORTABLETypeSpec(projectName: String, fields: HashMap<String, ArrayList<GDoRField<*>>>): TypeSpec {
-        val className = "${projectName.replace("-", "").toUpperCase()}_GDORTABLE"
+        val className = "${projectName.replace("-", "").toUpperCase()}${GDoRConstants.GDORTABLE_SUFFIX}"
         return TypeSpec.classBuilder(className)
             .addSuperinterface(GDoRTable::class.java)
             .addModifiers(Modifier.PUBLIC)

@@ -8,6 +8,7 @@ import com.squareup.javapoet.TypeSpec
 import gadget.base.processor.GAnnotationProcessor
 import gadget.common.GConstants
 import gadget.common.util.GString
+import gadget.route.GRouteConstants
 import gadget.route.GRoutePath
 import gadget.route.GRouteTable
 import javax.annotation.processing.Processor
@@ -58,7 +59,7 @@ class GRoutePathAnnotationProcessor : GAnnotationProcessor() {
     }
 
     private fun getPROJECT_GROUTETABLETypeSpec(projectName: String, routeTable: HashMap<String, String>): TypeSpec {
-        val className = "${projectName.replace("-", "").toUpperCase()}_GROUTETABLE"
+        val className = "${projectName.replace("-", "").toUpperCase()}${GRouteConstants.GROUTETABLE_SUFFIX}"
         return TypeSpec.classBuilder(className)
             .addSuperinterface(GRouteTable::class.java)
             .addModifiers(Modifier.PUBLIC)

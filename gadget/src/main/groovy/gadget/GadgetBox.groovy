@@ -95,7 +95,7 @@ class GadgetBox {
 
         def gadgetDoRCompile() {
             if (!context.isApplicationProject) {
-                throw new IllegalStateException("gadgetDoRPlugin() can only work in Android Application.")
+                throw new IllegalStateException("gadgetDoRCompile() can only work in Android Application.")
             }
             transformers.add(new GDoRTransformer())
         }
@@ -136,6 +136,9 @@ class GadgetBox {
         }
 
         def gadgetRouteCompile() {
+            if (!context.isApplicationProject) {
+                throw new IllegalStateException("gadgetRouteCompile() can only work in Android Application.")
+            }
             transformers.add(new GRouteTransformer())
         }
         /** Inject gadget-route **/

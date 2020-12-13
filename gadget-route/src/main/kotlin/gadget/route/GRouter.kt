@@ -22,6 +22,8 @@ object GRouter {
      */
     private fun getGRouteTables(): List<GRouteTable> = emptyList()
 
+    public fun test() = routeMap
+
     fun from(context: Context): GRouteTask = GRouteTask(context)
 
     fun from(context: Context, intent: Intent): GRouteTask = GRouteTask(context, intent)

@@ -3,6 +3,7 @@ package gadget.dor.plugin
 import gadget.base.plugin.asm.GClassVisitor
 import gadget.base.plugin.asm.GMethodVisitor
 import gadget.base.plugin.asm.GTransformer
+import gadget.dor.GDoRConstants
 import jdk.internal.org.objectweb.asm.*
 import jdk.internal.org.objectweb.asm.tree.ClassNode
 
@@ -12,41 +13,46 @@ import jdk.internal.org.objectweb.asm.tree.ClassNode
  */
 class GDoRTransformer : GTransformer() {
     companion object {
-        private const val GDOR_CLASS = "gadget/dor/GDoR"
-        private const val GDOR_METHOD = "getGDoRTables"
-        private const val GDORTABLE_INTERFACE = "gadget/dor/GDoRTable"
+        private const val GDOR_CLASS_NAME = "gadget/dor/GDoR"
+        private const val GDOR_METHOD_NAME = "getGDoRTables"
+        private const val GDORTABLE_INTERFACE_NAME = "gadget/dor/GDoRTable"
+        private const val GDORTABLE_CLASS = "${GDoRConstants.GDORTABLE_SUFFIX}.class"
     }
 
-    private val dorList: MutableList<String> = ArrayList()
+    private val dorTableList: MutableList<String> = ArrayList()
+
+    override fun filterClass(className: String): Boolean {
+        return className.startsWith(GDOR_CLASS_NAME) || className.endsWith(GDORTABLE_CLASS)
+    }
 
     override fun transformClass(classBytes: ByteArray): ByteArray {
         val cr = ClassReader(classBytes)
         val cn = ClassNode()
         cr.accept(cn, ClassReader.EXPAND_FRAMES)
 
-        if (cn.name == GDOR_CLASS) {
+        if (cn.name == GDOR_CLASS_NAME) {
             val cw = ClassWriter(cr, ClassWriter.COMPUTE_MAXS)
-            val cv = GDoRCV(cw, dorList)
+            val cv = GDoRCV(cw, dorTableList)
             cr.accept(cv, ClassReader.EXPAND_FRAMES)
             return cw.toByteArray()
-        } else if (cn.interfaces.contains(GDORTABLE_INTERFACE)) {
-            dorList.add(cn.name)
+        } else if (cn.interfaces.contains(GDORTABLE_INTERFACE_NAME)) {
+            dorTableList.add(cn.name)
         }
 
         return super.transformClass(classBytes)
     }
 
-    private class GDoRCV(cv: ClassVisitor, val dorList: List<String>)
+    private class GDoRCV(cv: ClassVisitor, val dorTableList: List<String>)
         : GClassVisitor(cv) {
 
         override fun visitMethod(access: Int, name: String?, desc: String?, signature: String?, exceptions: Array<String>?): MethodVisitor {
             val mv = super.visitMethod(access, name, desc, signature, exceptions)
-            return if (name == GDOR_METHOD) GDoRMV(mv, dorList) else mv
+            return if (name == GDOR_METHOD_NAME) GDoRMV(mv, dorTableList) else mv
         }
     }
 
 
-    private class GDoRMV(mv: MethodVisitor, val dorList: List<String>) : GMethodVisitor(mv) {
+    private class GDoRMV(mv: MethodVisitor, val dorTableList: List<String>) : GMethodVisitor(mv) {
 
         override fun visitCode() {
             mv.visitCode()
@@ -55,7 +61,7 @@ class GDoRTransformer : GTransformer() {
             mv.visitMethodInsn(Opcodes.INVOKESPECIAL, "java/util/ArrayList", "<init>", "()V", false)
             mv.visitVarInsn(Opcodes.ASTORE, 1)
 
-            dorList.forEach { dor ->
+            dorTableList.forEach { dor ->
                 mv.visitVarInsn(Opcodes.ALOAD, 1)
                 mv.visitTypeInsn(Opcodes.NEW, dor)
                 mv.visitInsn(Opcodes.DUP)
