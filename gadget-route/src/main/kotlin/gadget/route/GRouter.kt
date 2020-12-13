@@ -12,15 +12,15 @@ object GRouter {
 
     private val routeMap: MutableMap<String, String> = HashMap()
 
-    fun init(vararg args: TaGRouteUrl) {
-        getTaGRouteUrlList().forEach { it.init(routeMap) }
+    fun init(vararg args: GRouteTable) {
+        getGRouteTables().forEach { it.init(routeMap) }
         args.forEach { it.init(routeMap) }
     }
 
     /**
      * If you pick gadgetRouteCompile(), This method will be rewritten During Compilation.
      */
-    private fun getTaGRouteUrlList(): List<TaGRouteUrl> = emptyList()
+    private fun getGRouteTables(): List<GRouteTable> = emptyList()
 
     fun from(context: Context): GRouteTask = GRouteTask(context)
 

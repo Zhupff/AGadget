@@ -218,7 +218,7 @@ class GDoRAnnotationProcessor : GAnnotationProcessor() {
 
     private fun generatePROJECT_GDoRClass(projectName: String, fields: HashMap<String, ArrayList<GDoRField<*>>>) {
         val javaFile = JavaFile
-            .builder(GConstants.GADGET_GENERATE_PACKAGE, getPROJECT_GDoRTypeSpec(projectName, fields))
+            .builder(GConstants.GADGET_GENERATE_PACKAGE, getPROJECT_GDORTABLETypeSpec(projectName, fields))
             .build()
         try {
             javaFile.writeTo(processingEnv.filer)
@@ -227,10 +227,10 @@ class GDoRAnnotationProcessor : GAnnotationProcessor() {
         }
     }
 
-    private fun getPROJECT_GDoRTypeSpec(projectName: String, fields: HashMap<String, ArrayList<GDoRField<*>>>): TypeSpec {
-        val className = "${projectName.replace("-", "").toUpperCase()}_TaGDoR"
+    private fun getPROJECT_GDORTABLETypeSpec(projectName: String, fields: HashMap<String, ArrayList<GDoRField<*>>>): TypeSpec {
+        val className = "${projectName.replace("-", "").toUpperCase()}_GDORTABLE"
         return TypeSpec.classBuilder(className)
-            .addSuperinterface(TaGDoR::class.java)
+            .addSuperinterface(GDoRTable::class.java)
             .addModifiers(Modifier.PUBLIC)
             .addMethod(getInitMethodSpec(fields))
             .build()

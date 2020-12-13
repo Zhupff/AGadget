@@ -120,9 +120,18 @@ class GadgetBox {
 
         /** Inject gadget-route **/
         def gadgetRoute() {
-            dependencies {
-                implementation GadgetInfo.GADGET_ROUTE_LIB
-                implementation GadgetInfo.GADGET_ROUTE
+            if (!context.isKotlin) {
+                dependencies {
+                    implementation GadgetInfo.GADGET_ROUTE_LIB
+                    implementation GadgetInfo.GADGET_ROUTE
+                    annotationProcessor GadgetInfo.GADGET_ROUTE_COMPILE
+                }
+            } else {
+                dependencies {
+                    implementation GadgetInfo.GADGET_ROUTE_LIB
+                    implementation GadgetInfo.GADGET_ROUTE
+                    kapt GadgetInfo.GADGET_ROUTE_COMPILE
+                }
             }
         }
 

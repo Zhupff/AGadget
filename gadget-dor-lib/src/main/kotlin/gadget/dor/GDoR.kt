@@ -6,13 +6,13 @@ package gadget.dor
  */
 object GDoR {
 
-    fun init(isDebug: Boolean, vararg args: TaGDoR) {
-        getTaGDoRList().forEach { it.init(isDebug) }
+    fun init(isDebug: Boolean, vararg args: GDoRTable) {
+        getGDoRTables().forEach { it.init(isDebug) }
         args.forEach { it.init(isDebug) }
     }
 
     /**
      * If you pick gadgetDoRCompile(), This method will be rewritten During Compilation.
      */
-    private fun getTaGDoRList(): List<TaGDoR> = emptyList()
+    private fun getGDoRTables(): List<GDoRTable> = emptyList()
 }
