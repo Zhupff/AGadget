@@ -24,6 +24,7 @@ class GLogInfo private constructor() {
     var isInnerClass: Boolean = false
     var isStaticMethod: Boolean = false
 
+    var logClass: String = ""
     var logMethod: String = ""
     var logTag: String = ""
     var logOption: MutableSet<GLogOption> = HashSet()
@@ -34,14 +35,17 @@ class GLogInfo private constructor() {
         isStaticMethod = (mn.access and Opcodes.ACC_STATIC) != 0
 
         mn.invisibleAnnotations?.forEach { an ->
-            if (GLogTransformer.GLOG_ANNOTATIONS.contains(an.desc)) {
-                logMethod = when (an.desc) {
-                    GLogTransformer.GLOG_V_ANNOTATION_DESC -> GLogTransformer.GLOG_V_METHOD_NAME
-                    GLogTransformer.GLOG_D_ANNOTATION_DESC -> GLogTransformer.GLOG_D_METHOD_NAME
-                    GLogTransformer.GLOG_I_ANNOTATION_DESC -> GLogTransformer.GLOG_I_METHOD_NAME
-                    GLogTransformer.GLOG_W_ANNOTATION_DESC -> GLogTransformer.GLOG_W_METHOD_NAME
-                    GLogTransformer.GLOG_E_ANNOTATION_DESC -> GLogTransformer.GLOG_E_METHOD_NAME
-                    else -> "" // should not reach here.
+            if (GLogTransformer.GLOG_ANNOTATIONS.contains(an.desc) ||
+                GLogTransformer.GDLOG_ANNOTATIONS.contains(an.desc)) {
+                val (_class, _method) = when (an.desc) {
+                    GLogTransformer.GLOG_V_ANNOTATION_DESC -> ()
+//                    GLogTransformer.GLOG_V_ANNOTATION_DESC -> GLogTransformer.GLOG_V_METHOD_NAME
+//                    GLogTransformer.GLOG_D_ANNOTATION_DESC -> GLogTransformer.GLOG_D_METHOD_NAME
+//                    GLogTransformer.GLOG_I_ANNOTATION_DESC -> GLogTransformer.GLOG_I_METHOD_NAME
+//                    GLogTransformer.GLOG_W_ANNOTATION_DESC -> GLogTransformer.GLOG_W_METHOD_NAME
+//                    GLogTransformer.GLOG_E_ANNOTATION_DESC -> GLogTransformer.GLOG_E_METHOD_NAME
+//                    GLogTransformer.GDLOG_V_ANNOTATION_DESC
+                    else -> ("", "") // should not reach here.
                 }
 
                 an.values?.let { values ->

@@ -34,13 +34,20 @@ class GLogTransformer : GTransformer() {
             GLOG_VV_METHOD_NAME, GLOG_DD_METHOD_NAME, GLOG_II_METHOD_NAME, GLOG_WW_METHOD_NAME, GLOG_EE_METHOD_NAME
         )
 
-        internal const val GLOG_V_ANNOTATION_DESC = "Lgadget/log/GLogI;"
+        internal const val GLOG_V_ANNOTATION_DESC = "Lgadget/log/GLogV;"
         internal const val GLOG_D_ANNOTATION_DESC = "Lgadget/log/GLogD;"
         internal const val GLOG_I_ANNOTATION_DESC = "Lgadget/log/GLogI;"
         internal const val GLOG_W_ANNOTATION_DESC = "Lgadget/log/GLogW;"
         internal const val GLOG_E_ANNOTATION_DESC = "Lgadget/log/GLogE;"
         internal val GLOG_ANNOTATIONS = arrayOf(GLOG_V_ANNOTATION_DESC, GLOG_D_ANNOTATION_DESC,
             GLOG_I_ANNOTATION_DESC, GLOG_W_ANNOTATION_DESC, GLOG_E_ANNOTATION_DESC)
+        internal const val GDLOG_V_ANNOTATION_DESC = "Lgadget/log/GDLogV;"
+        internal const val GDLOG_D_ANNOTATION_DESC = "Lgadget/log/GDLogD;"
+        internal const val GDLOG_I_ANNOTATION_DESC = "Lgadget/log/GDLogI;"
+        internal const val GDLOG_W_ANNOTATION_DESC = "Lgadget/log/GDLogW;"
+        internal const val GDLOG_E_ANNOTATION_DESC = "Lgadget/log/GDLogE;"
+        internal val GDLOG_ANNOTATIONS = arrayOf(GDLOG_V_ANNOTATION_DESC, GDLOG_D_ANNOTATION_DESC,
+            GDLOG_I_ANNOTATION_DESC, GDLOG_W_ANNOTATION_DESC, GDLOG_E_ANNOTATION_DESC)
     }
 
     private var isDebug: Boolean = false
