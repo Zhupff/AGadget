@@ -37,16 +37,16 @@ class GLogInfo private constructor() {
         mn.invisibleAnnotations?.forEach { an ->
             if (GLogTransformer.GLOG_ANNOTATIONS.contains(an.desc) ||
                 GLogTransformer.GDLOG_ANNOTATIONS.contains(an.desc)) {
-                val (_class, _method) = when (an.desc) {
-                    GLogTransformer.GLOG_V_ANNOTATION_DESC -> ()
+//                val (_class, _method) = when (an.desc) {
+//                    GLogTransformer.GLOG_V_ANNOTATION_DESC -> ()
 //                    GLogTransformer.GLOG_V_ANNOTATION_DESC -> GLogTransformer.GLOG_V_METHOD_NAME
 //                    GLogTransformer.GLOG_D_ANNOTATION_DESC -> GLogTransformer.GLOG_D_METHOD_NAME
 //                    GLogTransformer.GLOG_I_ANNOTATION_DESC -> GLogTransformer.GLOG_I_METHOD_NAME
 //                    GLogTransformer.GLOG_W_ANNOTATION_DESC -> GLogTransformer.GLOG_W_METHOD_NAME
 //                    GLogTransformer.GLOG_E_ANNOTATION_DESC -> GLogTransformer.GLOG_E_METHOD_NAME
 //                    GLogTransformer.GDLOG_V_ANNOTATION_DESC
-                    else -> ("", "") // should not reach here.
-                }
+//                    else -> ("", "") // should not reach here.
+//                }
 
                 an.values?.let { values ->
                     val kv = GList.toMapWithStringKey(values)

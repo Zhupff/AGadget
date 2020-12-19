@@ -4,11 +4,15 @@ buildscript {
     repositories {
         google()
         jcenter()
+        // sample
+        maven { url LOCAL_NEXUS_URL}
     }
     dependencies {
         classpath BUILD_GRADLE
         classpath KOTLIN_GRADLE
         classpath MAVEN_GRADLE_PLUGIN
+        // sample
+        classpath "${GADGET_GROUP}:gadget:${GADGET_VERSION}"
     }
 }
 

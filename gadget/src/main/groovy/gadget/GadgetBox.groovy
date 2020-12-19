@@ -1,5 +1,6 @@
 package gadget
 
+import gadget.base.GadgetInfo
 import gadget.base.plugin.asm.GTransformer
 import gadget.base.plugin.simple.GSimpleAppPlugin
 import gadget.base.plugin.simple.GSimpleLibPlugin

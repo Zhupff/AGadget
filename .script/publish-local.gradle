@@ -6,7 +6,7 @@ properties.load(project.rootProject.file('local.properties').newDataInputStream(
 uploadArchives {
     repositories {
         mavenDeployer {
-            repository(url: properties.getProperty("NEXUS_URL")) {
+            repository(url: properties.getProperty(LOCAL_NEXUS_URL)) {
                 authentication(
                     userName: properties.getProperty("NEXUS_USERNAME"),
                     password: properties.getProperty("NEXUS_PASSWORD")

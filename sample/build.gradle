@@ -2,6 +2,13 @@ apply plugin: "com.android.application"
 apply plugin: "kotlin-android"
 apply plugin: "kotlin-android-extensions"
 
+repositories {
+    google()
+    jcenter()
+    // sample
+    maven { url LOCAL_NEXUS_URL}
+}
+
 android {
     compileSdkVersion COMPILE_SDK_VERSION as int
     buildToolsVersion BUILD_TOOL_VERSION
@@ -27,8 +34,10 @@ dependencies {
     implementation ANDROIDX
     implementation KOTLIN_KTX
     implementation KOTLIN_STDLIB
+}
 
-    implementation project(":gadget-common-lib")
-    implementation project(":gadget-common-module")
-    implementation project(":gadget-log")
+gadget.GadgetBox.open {
+    gadgetLog()
+    gadgetLogCompile()
+    close()
 }

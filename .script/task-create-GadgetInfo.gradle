@@ -1,31 +1,21 @@
 task createGadgetInfo() {
-    new File("${rootProject.projectDir.path}/gadget/src/main/groovy/gadget/GadgetInfo.groovy")
-        .text = new StringBuilder()
+    StringBuilder sb = new StringBuilder()
         .append("/* Do Not Modify! Do Not Modify! Do Not Modify! */\n")
         .append("/* This File Is Generated Automatically! */\n")
         .append("\n")
-        .append("package gadget\n")
+        .append("package gadget.base\n")
         .append("\n")
-        .append("final class GadgetInfo {\n")
-        .append("private GadgetInfo() {}\n")
-        .append(getGroupVersion())
-        .append(getProjectInfo())
-        .append("}")
-}
-
-def getGroupVersion() {
-    StringBuilder sb = new StringBuilder()
-        .append("static final String GROUP = \"${GADGET_GROUP}\"\n")
-        .append("static final String VERSION = \"${GADGET_VERSION}\"\n")
-    return sb.toString()
-}
-
-def getProjectInfo() {
-    StringBuilder sb = new StringBuilder()
+        .append("class GadgetInfo private constructor() {\n")
+        .append("    companion object {\n")
+        .append("        const val GADGET_GROUP: String = \"${GADGET_GROUP}\"\n")
+        .append("        const val GADGET_VERSION: String = \"${GADGET_VERSION}\"\n")
     rootProject.subprojects.each { p ->
-        String projectName = p.name
-        String defName = projectName.replace("-", "_").toUpperCase()
-        sb.append("static final String ${defName} = \"${GADGET_GROUP}:${projectName}:${GADGET_VERSION}\"\n")
+        sb.append("        const val ${p.name.replace("-", "_").toUpperCase()}: String = ")
+            .append("\"${GADGET_GROUP}:${p.name}:${GADGET_VERSION}\"\n")
     }
-    return sb.toString()
+    sb.append("    }\n")
+        .append("}")
+
+    new File("${rootProject.projectDir.path}/gadget-base/src/main/kotlin/gadget/base/GadgetInfo.kt")
+        .text = sb.toString()
 }

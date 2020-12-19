@@ -3,7 +3,7 @@ package gadget.base.plugin.simple
 import com.android.build.api.transform.JarInput
 import com.android.build.api.transform.TransformInvocation
 import com.android.build.api.transform.TransformOutputProvider
-import gadget.base.GBaseInfo
+import gadget.base.GadgetInfo
 import gadget.base.plugin.GAppTransform
 import gadget.base.plugin.GPluginContext
 import gadget.base.plugin.asm.GTransformer
@@ -22,7 +22,7 @@ open class GSimpleAppTransform(
         invocation.inputs.forEach { transformInput ->
             transformInput.directoryInputs.forEach { handleDirInput(it, output) }
             transformInput.jarInputs.forEach {
-                if (it.name.startsWith(GBaseInfo.GROUP)) {
+                if (it.name.startsWith(GadgetInfo.GADGET_GROUP)) {
                     gadgetJars.add(it)
                 } else {
                     handleJarInput(it, output)
