@@ -36,7 +36,7 @@ internal class GLogTask private constructor() : GTask, Runnable {
 
     fun withFormatted(formatted: Boolean) = apply { this.logFormat = if (formatted) GNiceLogFormat else GSimpleLogFormat }
 
-    fun reset() = apply {
+    private fun reset() = apply {
         this.level = GLogLevel.VERBOSE
         this.tag = DEF_TAG
         this.content.clear()

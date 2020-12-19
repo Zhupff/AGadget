@@ -3,6 +3,7 @@ package gadget.log.plugin
 import gadget.base.plugin.GPluginContext
 import gadget.base.plugin.asm.GTransformer
 import gadget.common.util.GString
+import gadget.log.GLogConstants.Companion.GLOG_METHODS
 import jdk.internal.org.objectweb.asm.ClassReader
 import jdk.internal.org.objectweb.asm.ClassWriter
 import jdk.internal.org.objectweb.asm.Opcodes
@@ -14,40 +15,10 @@ import jdk.internal.org.objectweb.asm.tree.*
  */
 class GLogTransformer : GTransformer() {
     companion object {
-        private const val GLOG_CLASS_NAME = "gadget/log/GLog"
-        private const val GDLOG_CLASS_NAME = "gadget/log/GDLog"
+        const val GLOG_CLASS_NAME = "gadget/log/GLog"
+        const val GDLOG_CLASS_NAME = "gadget/log/GDLog"
         private const val TRANSFORM_METHOD_NAME = "log"
         private const val TRANSFORM_METHOD_DESC = "(Lgadget/log/GLogTask;Ljava/lang/String;)Lgadget/log/GLogTask;"
-
-        internal const val GLOG_V_METHOD_NAME = "V"
-        internal const val GLOG_D_METHOD_NAME = "D"
-        internal const val GLOG_I_METHOD_NAME = "I"
-        internal const val GLOG_W_METHOD_NAME = "W"
-        internal const val GLOG_E_METHOD_NAME = "E"
-        private const val GLOG_VV_METHOD_NAME = "VV"
-        private const val GLOG_DD_METHOD_NAME = "DD"
-        private const val GLOG_II_METHOD_NAME = "II"
-        private const val GLOG_WW_METHOD_NAME = "WW"
-        private const val GLOG_EE_METHOD_NAME = "EE"
-        internal val GLOG_METHODS = arrayOf(
-            GLOG_V_METHOD_NAME, GLOG_D_METHOD_NAME, GLOG_I_METHOD_NAME, GLOG_W_METHOD_NAME, GLOG_E_METHOD_NAME,
-            GLOG_VV_METHOD_NAME, GLOG_DD_METHOD_NAME, GLOG_II_METHOD_NAME, GLOG_WW_METHOD_NAME, GLOG_EE_METHOD_NAME
-        )
-
-        internal const val GLOG_V_ANNOTATION_DESC = "Lgadget/log/GLogV;"
-        internal const val GLOG_D_ANNOTATION_DESC = "Lgadget/log/GLogD;"
-        internal const val GLOG_I_ANNOTATION_DESC = "Lgadget/log/GLogI;"
-        internal const val GLOG_W_ANNOTATION_DESC = "Lgadget/log/GLogW;"
-        internal const val GLOG_E_ANNOTATION_DESC = "Lgadget/log/GLogE;"
-        internal val GLOG_ANNOTATIONS = arrayOf(GLOG_V_ANNOTATION_DESC, GLOG_D_ANNOTATION_DESC,
-            GLOG_I_ANNOTATION_DESC, GLOG_W_ANNOTATION_DESC, GLOG_E_ANNOTATION_DESC)
-        internal const val GDLOG_V_ANNOTATION_DESC = "Lgadget/log/GDLogV;"
-        internal const val GDLOG_D_ANNOTATION_DESC = "Lgadget/log/GDLogD;"
-        internal const val GDLOG_I_ANNOTATION_DESC = "Lgadget/log/GDLogI;"
-        internal const val GDLOG_W_ANNOTATION_DESC = "Lgadget/log/GDLogW;"
-        internal const val GDLOG_E_ANNOTATION_DESC = "Lgadget/log/GDLogE;"
-        internal val GDLOG_ANNOTATIONS = arrayOf(GDLOG_V_ANNOTATION_DESC, GDLOG_D_ANNOTATION_DESC,
-            GDLOG_I_ANNOTATION_DESC, GDLOG_W_ANNOTATION_DESC, GDLOG_E_ANNOTATION_DESC)
     }
 
     private var isDebug: Boolean = false
@@ -87,7 +58,7 @@ class GLogTransformer : GTransformer() {
         var hasTransformed = false
         val cnSimpleName = GString.subStringAfterLast(cn.name, "/", 1, cn.name)
         cn.methods.forEach { mn ->
-            val logInfo = GLogInfo.acquire().init(cn, mn)
+            val logInfo = GLogInfo.acquire(cn, mn)
 
             hasTransformed = hasTransformed || transformMethodWhenEnter(logInfo, mn)
 
@@ -137,14 +108,14 @@ class GLogTransformer : GTransformer() {
     }
 
     private fun transformMethodWhenEnter(logInfo: GLogInfo, mn: MethodNode): Boolean {
-        if (GString.isNullOrEmpty(logInfo.logMethod)) {
+        if (!logInfo.hasLogAnnotation) {
             return false
         }
         return true
     }
 
     private fun transformMethodWhenLeave(logInfo: GLogInfo, mn: MethodNode): Boolean {
-        if (GString.isNullOrEmpty(logInfo.logMethod)) {
+        if (!logInfo.hasLogAnnotation) {
             return false
         }
         return true
