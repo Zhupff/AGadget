@@ -1,0 +1,24 @@
+apply plugin: "java-library"
+apply plugin: "kotlin"
+apply plugin: "groovy"
+
+dependencies {
+    compileOnly gradleApi()
+    compileOnly BUILD_GRADLE
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+task createApiInfoClass() {
+    new File("${projectDir.path}/src/main/kotlin/gadget/api/GadgetApiInfo.kt")
+        .text = new StringBuilder()
+        .append("/** Do Not Modify! This File Is Generated Automatically! **/\n")
+        .append("package gadget.api\n")
+        .append("object GadgetApiInfo {\n")
+        .append("    const val APT_PACKAGE = \"gadget.apt\"\n")
+        .append("    const val APT_PACKAGE_DIR = \"gadget/apt\"\n")
+        .append("}")
+}
+
+apply from: rootProject.file("gradle/scripts/publish.gradle")

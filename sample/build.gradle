@@ -1,5 +1,28 @@
-import gadget.DepBuilder
+apply plugin: "com.android.application"
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-kapt"
 
-DepBuilder.build {
-    gadgetSampleGradle()
+android {
+    buildToolsVersion BUILD_TOOL_VERSION
+    compileSdkVersion COMPILE_SDK_VERSION as int
+    defaultConfig {
+        applicationId "agadget.sample"
+        minSdkVersion MIN_SDK_VERSION as int
+        targetSdkVersion TARGET_SDK_VERSION as int
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    buildFeatures {
+        dataBinding true
+    }
+}
+
+dependencies {
+    implementation ANDROIDX
+    implementation KOTLIN_KTX
+    implementation KOTLIN_STDLIB
+    implementation CONSTRAINT_LAYOUT
+    implementation MATERIAL
 }

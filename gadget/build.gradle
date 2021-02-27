@@ -1,11 +1,13 @@
-import gadget.DepBuilder
+apply plugin: "java-library"
+apply plugin: "groovy"
 
-DepBuilder.build {
-    gadgetPluginGradle()
-    createGadgetInfoGradle()
-    jitpackPublishGradle()
-
-    gadgetBase()
-    gadgetDoRPlugin()
-    gadgetRoutePlugin()
+dependencies {
+    implementation gradleApi()
+    implementation BUILD_GRADLE
+    implementation project(":gadget-api")
 }
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+apply from: rootProject.file("gradle/scripts/publish.gradle")

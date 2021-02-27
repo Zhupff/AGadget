@@ -11,16 +11,10 @@ buildscript {
 }
 
 allprojects {
-    group = GADGET_GROUP
-    version = GADGET_VERSION
     repositories {
         google()
         jcenter()
     }
-}
-
-gadget.DepBuilder.build {
-    createDepInfoGradle()
 }
 
 task clean(type: Delete) {

@@ -1,0 +1,29 @@
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+if ("true".equalsIgnoreCase(properties.getProperty("LOCAL_PUBLISH"))) {
+    group = properties.getProperty("PROJECT_GROUP")
+    version = properties.getProperty("PROJECT_VERSION")
+
+    apply plugin: "maven"
+
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                repository(url: properties.getProperty("NEXUS_URL")) {
+                    authentication(
+                        userName: properties.getProperty("NEXUS_USERNAME"),
+                        password: properties.getProperty("NEXUS_PASSWORD")
+                    )
+                }
+                pom.groupId = project.group
+                pom.artifactId = project.name
+                pom.version = project.version
+            }
+        }
+    }
+} else {
+    group = PROJECT_GROUP
+    version = PROJECT_VERSION
+    apply plugin: "com.github.dcendents.android-maven"
+}

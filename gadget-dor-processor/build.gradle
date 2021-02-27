@@ -1,9 +1,0 @@
-import gadget.DepBuilder
-
-DepBuilder.build {
-    gadgetProcessorGradle()
-    jitpackPublishGradle()
-
-    gadgetBase()
-    gadgetDoRAnnotation()
-}
