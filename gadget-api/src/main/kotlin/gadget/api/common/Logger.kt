@@ -1,68 +1,69 @@
 package gadget.api.common
 
-import gadget.api.common.LoggerConfig.LoggerLevel
-import groovy.lang.Closure
+import gadget.api.closure.GadgetLoggerClosure
 
 /**
  * @Author: Zhupf
  */
-class LoggerConfig {
-    enum class LoggerLevel {
+object Logger {
+
+    private enum class Level {
         VERBOSE, DEBUG, INFO, WARN, ERROR
     }
 
-    var minLevel: String? = "v"
-    var maxLevel: String? = "e"
+    private var minLevel: Level = Level.VERBOSE
+    private var maxLevel: Level = Level.ERROR
 
-    fun getLevel(level: String?): LoggerLevel =
-        if ("d".equals(level, true) || "debug".equals(level, true)) {
-            LoggerLevel.DEBUG
-        } else if ("i".equals(level, true) || "info".equals(level, true)) {
-            LoggerLevel.INFO
-        } else if ("w".equals(level, true) || "warn".equals(level, true)) {
-            LoggerLevel.WARN
-        } else if ("e".equals(level, true) || "error".equals(level, true)) {
-            LoggerLevel.ERROR
-        } else {
-            LoggerLevel.VERBOSE
+    fun init(config: GadgetLoggerClosure?) {
+        config?.let {
+            minLevel = when (it.minLevel?.toLowerCase()) {
+                "e", "error" -> Level.ERROR
+                "w", "warn" -> Level.WARN
+                "i", "info" -> Level.INFO
+                "d", "debug" -> Level.DEBUG
+                "v", "verbose" -> Level.VERBOSE
+                else -> Level.VERBOSE
+            }
+            maxLevel = when (it.maxLevel?.toLowerCase()) {
+                "v", "verbose" -> Level.VERBOSE
+                "d", "debug" -> Level.DEBUG
+                "i", "info" -> Level.INFO
+                "w", "warn" -> Level.WARN
+                "e", "error" -> Level.ERROR
+                else -> Level.ERROR
+            }
         }
-}
-
-object Logger {
-
-    private var minLevel: LoggerLevel = LoggerLevel.VERBOSE
-    private var maxLevel: LoggerLevel = LoggerLevel.ERROR
-
-    fun delegate(closure: Closure<Any>) {
-        val config = LoggerConfig()
-        closure.delegate = config
-        closure.call()
-        minLevel = config.getLevel(config.minLevel)
-        maxLevel = config.getLevel(config.maxLevel)
-        log(minLevel, "LoggerConfig: minLevel=${i(minLevel)}, maxLevel=${i(maxLevel)}.", true)
     }
 
     internal fun v(msg: Any, ln: Boolean) {
-        log(LoggerLevel.VERBOSE, msg, ln)
+        log(Level.VERBOSE, msg, ln)
     }
 
     internal fun d(msg: Any, ln: Boolean) {
-        log(LoggerLevel.DEBUG, msg, ln)
+        log(Level.DEBUG, msg, ln)
     }
 
     internal fun i(msg: Any, ln: Boolean) {
-        log(LoggerLevel.INFO, msg, ln)
+        log(Level.INFO, msg, ln)
     }
 
     internal fun w(msg: Any, ln: Boolean) {
-        log(LoggerLevel.WARN, msg, ln)
+        log(Level.WARN, msg, ln)
     }
 
     internal fun e(msg: Any, ln: Boolean) {
-        log(LoggerLevel.ERROR, msg, ln)
+        log(Level.ERROR, msg, ln)
     }
 
-    private fun log(level: LoggerLevel, msg: Any, ln: Boolean) {
+    internal fun min(msg: Any, ln: Boolean) {
+        log(minLevel, msg, ln)
+    }
+
+    internal fun max(msg: Any, ln: Boolean) {
+        log(maxLevel, msg, ln)
+    }
+
+    private fun log(level: Level, msg: Any, ln: Boolean) {
         if (level < minLevel || level > maxLevel) {
             return
         }
@@ -75,45 +76,77 @@ object Logger {
 }
 
 object Log {
+
+    @JvmStatic
     fun v(msg: String, vararg args: Any?) {
         Logger.v(String.format(msg, *args), false)
     }
 
+    @JvmStatic
     fun d(msg: String, vararg args: Any?) {
         Logger.d(String.format(msg, *args), false)
     }
 
+    @JvmStatic
     fun i(msg: String, vararg args: Any?) {
         Logger.i(String.format(msg, *args), false)
     }
 
+    @JvmStatic
     fun w(msg: String, vararg args: Any?) {
         Logger.w(String.format(msg, *args), false)
     }
 
+    @JvmStatic
     fun e(msg: String, vararg args: Any?) {
         Logger.e(String.format(msg, *args), false)
+    }
+
+    @JvmStatic
+    fun min(msg: String, vararg args: Any?) {
+        Logger.min(String.format(msg, *args), false)
+    }
+
+    @JvmStatic
+    fun max(msg: String, vararg args: Any?) {
+        Logger.max(String.format(msg, *args), false)
     }
 }
 
 object Logln {
+
+    @JvmStatic
     fun v(msg: String, vararg args: Any?) {
         Logger.v(String.format(msg, *args), true)
     }
 
+    @JvmStatic
     fun d(msg: String, vararg args: Any?) {
         Logger.d(String.format(msg, *args), true)
     }
 
+    @JvmStatic
     fun i(msg: String, vararg args: Any?) {
         Logger.i(String.format(msg, *args), true)
     }
 
+    @JvmStatic
     fun w(msg: String, vararg args: Any?) {
         Logger.w(String.format(msg, *args), true)
     }
 
+    @JvmStatic
     fun e(msg: String, vararg args: Any?) {
         Logger.e(String.format(msg, *args), true)
+    }
+
+    @JvmStatic
+    fun min(msg: String, vararg args: Any?) {
+        Logger.min(String.format(msg, *args), true)
+    }
+
+    @JvmStatic
+    fun max(msg: String, vararg args: Any?) {
+        Logger.max(String.format(msg, *args), true)
     }
 }

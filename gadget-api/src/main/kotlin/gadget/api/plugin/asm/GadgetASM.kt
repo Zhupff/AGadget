@@ -65,7 +65,7 @@ fun AnnotationNode.getValueMap(): Map<String, Any> {
 fun AbstractInsnNode.isReturnNode(): Boolean = opcode in arrayOf(
     Opcodes.RETURN, Opcodes.ARETURN, Opcodes.DRETURN, Opcodes.FRETURN, Opcodes.IRETURN, Opcodes.LRETURN)
 
-fun newInsnNode(i: Int): InsnNode = when (i) {
+fun AbstractInsnNode.newInsnNode(i: Int): InsnNode = when (i) {
     -1 -> InsnNode(Opcodes.ICONST_M1)
     0 -> InsnNode(Opcodes.ICONST_0)
     1 -> InsnNode(Opcodes.ICONST_1)
@@ -77,7 +77,7 @@ fun newInsnNode(i: Int): InsnNode = when (i) {
         "Cannot invoke getInsnNode(${i}), Consider use getIntInsnNode(${i}) instead.")
 }
 
-fun newIntInsnNode(i: Int): IntInsnNode = when (i) {
+fun AbstractInsnNode.newIntInsnNode(i: Int): IntInsnNode = when (i) {
     in -1..5 -> throw IllegalArgumentException(
         "Cannot invoke getIntInsnNode(${i}), Consider use getInsnNode(${i}) instead.")
     in -128..127 -> IntInsnNode(Opcodes.BIPUSH, i)

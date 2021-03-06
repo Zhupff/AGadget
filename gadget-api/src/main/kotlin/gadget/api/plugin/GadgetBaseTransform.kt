@@ -13,19 +13,22 @@ import gadget.api.common.i
  */
 abstract class GadgetBaseTransform : Transform() {
 
+    /** 相关上下文信息，必须使用[withContext]初始化后才算"激活"该[Transform]。 **/
     lateinit var context: GadgetPluginContext
         private set
-    lateinit var transformers: List<GadgetBaseTransformer>
-        private set
-
     fun withContext(context: GadgetPluginContext) = apply { this.context = context }
-    fun withTransformers(transformers: List<GadgetBaseTransformer>) = apply { this.transformers = transformers }
-    fun withTransformers(vararg transformers: GadgetBaseTransformer) = apply { this.transformers = transformers.toList() }
+
+    /** .class 文件处理器。 **/
+    protected var transformers: MutableSet<GadgetBaseTransformer> = LinkedHashSet()
+        private set
+    fun withTransformers(transformers: Collection<GadgetBaseTransformer>) = apply { this.transformers.addAll(transformers) }
+    fun withTransformers(vararg transformers: GadgetBaseTransformer) = apply { this.transformers.addAll(transformers.toSet()) }
 
     override fun getName(): String = javaClass.simpleName
     override fun isIncremental(): Boolean = true
     override fun getInputTypes(): MutableSet<QualifiedContent.ContentType> = TransformManager.CONTENT_CLASS
 
+    /** 该次[transform]是否是增量 **/
     protected var incremental: Boolean = false
     override fun transform(transformInvocation: TransformInvocation?) {
         super.transform(transformInvocation)
@@ -41,20 +44,25 @@ abstract class GadgetBaseTransform : Transform() {
         }
     }
 
+    /** [transform]开始时间 **/
     private var transformStartTime: Long = 0L
+    /** [transform]开始 **/
     protected open fun onTransformStart() {
         transformStartTime = System.currentTimeMillis()
-        Logln.i("%s %s onTransformStart, incremental=%s.", d(transformStartTime), i(name), i(incremental))
+        Logln.min("%s %s onTransformStart, incremental=%s.", d(transformStartTime), i(name), i(incremental))
         transformers.forEach { it.onTransformStart(context) }
     }
 
+    /** [transform]结束时间 **/
     private var transformStopTime: Long = 0L
+    /** [transform]结束 **/
     protected open fun onTransformStop() {
         transformers.forEach { it.onTransformStop(context) }
         transformStopTime = System.currentTimeMillis()
-        Logln.i("%s %s onTransformStop, duration=%s.", d(transformStopTime), i(name), i(transformStopTime - transformStartTime))
+        Logln.min("%s %s onTransformStop, duration=%s.", d(transformStopTime), i(name), i(transformStopTime - transformStartTime))
     }
 
+    /** 处理[TransformInvocation]，获取里面的[DirectoryInput]和[JarInput] **/
     protected open fun handleTransformInvocation(
         transformInvocation: TransformInvocation, outputProvider: TransformOutputProvider) {
         transformInvocation.inputs.forEach { input ->
@@ -63,22 +71,26 @@ abstract class GadgetBaseTransform : Transform() {
         }
     }
 
+    /** 处理[DirectoryInput]，默认是将其直接传递给下一个流程 **/
     protected open fun handleDirInput(input: DirectoryInput, output: TransformOutputProvider) {
         FileUtils.copyDirectory(input.file,
             output.getContentLocation(input.name, input.contentTypes, input.scopes, Format.DIRECTORY))
     }
 
+    /** 处理[JarInput]，默认是将其直接传递给下一个流程 **/
     protected open fun handleJarInput(input: JarInput, output: TransformOutputProvider) {
         FileUtils.copyFile(input.file,
             output.getContentLocation(input.name, input.contentTypes, input.scopes, Format.JAR))
     }
 
+    /** 遍历[transformers]处理来自[DirectoryInput]的.class文件数据 **/
     protected open fun handleDirClass(className: String, classBytes: ByteArray): ByteArray {
         var bytes = classBytes
         transformers.forEach { bytes = it.handleDirClass(className, bytes) }
         return bytes
     }
 
+    /** 遍历[transformers]处理来自[JarInput]的.class文件数据 **/
     protected open fun handleJarClass(className: String, classBytes: ByteArray): ByteArray {
         var bytes = classBytes
         transformers.forEach { bytes = it.handleJarClass(className, bytes) }

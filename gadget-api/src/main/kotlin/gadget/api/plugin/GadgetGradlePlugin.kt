@@ -1,7 +1,6 @@
 package gadget.api.plugin
 
 import com.android.build.gradle.AppExtension
-import com.android.build.gradle.BaseExtension
 import com.android.build.gradle.LibraryExtension
 import gadget.api.common.Logln
 import gadget.api.common.i
@@ -14,16 +13,18 @@ import org.gradle.api.Project
  */
 class GadgetGradlePlugin : Plugin<Project> {
     companion object {
+        /** AGadget 默认流程([GadgetLibTransform]或[GadgetAppTransform])使用的 transformer。 **/
         val transformerMap: HashMap<String, ArrayList<GadgetBaseTransformer>> = HashMap()
+        /** 自定义[GadgetBaseTransform]，其所需的 transformer 需自行赋值。 **/
         val transformMap: HashMap<String, ArrayList<GadgetBaseTransform>> = HashMap()
     }
 
     lateinit var context: GadgetPluginContext
 
     override fun apply(project: Project) {
-        Logln.i("%s apply %s.", i(project.name), i(javaClass.simpleName))
+        Logln.min("%s apply %s.", i(project.name), i(javaClass.simpleName))
 
-        context = GadgetPluginContext(project)
+        context = GadgetPluginContext().initWithProject(project)
         val transformers = transformerMap[context.projectName] ?: emptyList<GadgetBaseTransformer>()
         val transforms = transformMap[context.projectName] ?: emptyList<GadgetBaseTransform>()
 
